@@ -11,6 +11,10 @@ gem 'sinatra'
 # Automatic server reloader on files change
 gem 'sinatra-reloader'
 
+# For JSON to XML methods
+gem 'builder'
+gem 'activesupport'
+
 # Common extensions for sinatra
 # gem 'sinatra-contrib'
 
@@ -24,3 +28,6 @@ group :development do
   gem 'guard-bundler'
   gem 'guard-rack'
 end
+
+# For creating HTTP requests
+gem 'patron'
