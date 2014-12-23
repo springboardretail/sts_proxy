@@ -15,8 +15,10 @@ class AppController < App
 
   ##
   # Refunds an amount of a gift card using STS
+  #
+  # @note also serves as a void action
   post '/v1/refund' do
-    communicate_with_sts(:capture)
+    communicate_with_sts(:refund)
   end
 
   private
