@@ -9,6 +9,17 @@
 # @param action [Symbol] action type
 class ServicesCommunicator
   attr_accessor :json_params, :url_params, :action
+  STS_URL = 'https://www.smart-transactions.com/testgateway.php'
+  #todo: remove these responses for a correct url
+  CHECK_BALANCE_RESPONSE = '<Response><Response_Code>00</Response_Code><Response_Text>311421</Response_Text><Auth_Reference>0001</Auth_Reference>
+<Amount_Balance>0.00</Amount_Balance><Expiration_Date>092429</Expiration_Date><Trans_Date_Time>060710105839</Trans_Date_Time>
+<Card_Number>711194103319309</Card_Number><Transaction_ID>56</Transaction_ID></Response>'
+  CAPTURE_RESPONSE = '<Response><Response_Code>00</Response_Code><Response_Text>941215</Response_Text><Auth_Reference>0001</Auth_Reference>
+<Amount_Balance>000</Amount_Balance><Expiration_Date>121627</Expiration_Date><Trans_Date_Time>032108122102</Trans_Date_Time>
+</Response>'
+  REFUND_RESPONSE = '<Response><Response_Code>00</Response_Code><Response_Text>331148</Response_Text><Auth_Reference>0001</Auth_Reference>
+<Amount_Balance>16.25</Amount_Balance><Expiration_Date>060130</Expiration_Date><Trans_Date_Time>060710012010</Trans_Date_Time>
+<Card_Number>18587500932</Card_Number><Transaction_ID>200862</Transaction_ID></Response>'
 
   def initialize(json_params, url_params, action)
     @json_params = json_params
@@ -25,7 +36,7 @@ class ServicesCommunicator
     combined_params = combine_params(renamed_params, url_params)
     data_to_send = change_format(combined_params, :hash, :xml)
 
-    received_data = send_data(data_to_send, 'https://www.smart-transactions.com/testgateway.php')
+    received_data = send_data(data_to_send, STS_URL)
     data_to_read = change_format(received_data, :xml, :hash)
     filter_data(data_to_read, action)
   end
@@ -77,9 +88,7 @@ class ServicesCommunicator
     content_type = 'application/x-www-form-urlencoded'
     response = Requester.request(url, data, content_type)
     response.body
-    '<Response><Response_Code>00</Response_Code><Response_Text>311421</Response_Text><Auth_Reference>0001</Auth_Reference>
-<Amount_Balance>0.00</Amount_Balance><Expiration_Date>092429</Expiration_Date><Trans_Date_Time>060710105839</Trans_Date_Time>
-<Card_Number>711194103319309</Card_Number><Transaction_ID>56</Transaction_ID></Response>'
+    CHECK_BALANCE_RESPONSE
   end
 
   ##

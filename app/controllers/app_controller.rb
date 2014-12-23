@@ -7,13 +7,25 @@ class AppController < App
     communicate_with_sts(:check_balance)
   end
 
+  ##
+  # Captures an amount of a gift card using STS
+  post '/v1/capture' do
+    communicate_with_sts(:capture)
+  end
+
+  ##
+  # Refunds an amount of a gift card using STS
+  post '/v1/refund' do
+    communicate_with_sts(:capture)
+  end
+
   private
 
   ##
   # Main action which calls a service communicator to receive data from STS
   #
   # @param action [Symbol] gift card action
-  # @return [JSON]
+  # @return [JSON or nil]
   # @example
   #   /v1/check_balance?Merchant_Number=111111111111&Terminal_ID=111&Action_Code=05&Trans_Type=N&POS_Entry_Mode=M
   #   with raw
@@ -26,6 +38,6 @@ class AppController < App
     json_params = JSON.parse(request.body.read)
     services_communicator = ServicesCommunicator.new(json_params, params, action)
     response = services_communicator.run
-    response.to_json
+    response.empty? ? nil : response.to_json
   end
 end
