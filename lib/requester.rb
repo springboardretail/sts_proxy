@@ -1,5 +1,5 @@
 ##
-#
+# Utility class which creates a request
 class Requester
   class << self
     def http
@@ -13,7 +13,7 @@ class Requester
     end
 
     ##
-    # Sends a request to the given webhook and returns a
+    # Sends a POST request to the given address and returns a
     # hash containing the parsed response body and the raw Patron response
     #
     # @param endpoint [String] address
@@ -23,6 +23,5 @@ class Requester
     def request(endpoint, body, content_type)
       http.post endpoint, body, 'Content-Type' => content_type
     end
-
   end
 end

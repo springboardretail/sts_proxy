@@ -1,5 +1,7 @@
 require './app/models/guides/base'
 
+##
+# Contains guides for check balance action
 class Guides::CheckBalance < Guides::Base
   def input
     [

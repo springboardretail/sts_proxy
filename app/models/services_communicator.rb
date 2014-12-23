@@ -1,8 +1,8 @@
 ##
-# Mega class which transforms given Springboard Retail params into a suitable type for a remote service
-# Handles result to the remote service
+# Main class which transforms given Springboard Retail params into a suitable type for a remote service
+# Passes transformed data to the remote service
 # Receives response from it
-# Transforms and sends the result to Springboard Retail
+# Transforms and sends the result back to Springboard Retail
 #
 # @param json_params [Hash] json data from SR
 # @param url_params [Hash] url data from SR
@@ -16,6 +16,10 @@ class ServicesCommunicator
     @action = action
   end
 
+  ##
+  # Main execution method
+  #
+  # @return [Hash] data to be sent to the requester
   def run
     renamed_params = rename_params(json_params, action)
     combined_params = combine_params(renamed_params, url_params)
@@ -23,39 +27,52 @@ class ServicesCommunicator
 
     received_data = send_data(data_to_send, 'https://www.smart-transactions.com/testgateway.php')
     data_to_read = change_format(received_data, :xml, :hash)
-    get_result(data_to_read, action)
+    filter_data(data_to_read, action)
   end
 
   private
 
   ##
+  # Renames params from SR to STS syntax using guides for a certain action
   #
+  # @param json_params [Hash] json data from SR
+  # @param action [Symbol] action type
+  # @return [Hash] renamed params
   def rename_params(json_params, action)
     params_renamer = ParamsOperators::Renamer.new(json_params, action)
     params_renamer.run
   end
 
   ##
+  # Combines urj params from SR and renamed params to be sent to STS
   #
+  # @param url_params [Hash] url data from SR
+  # @param renamed_params [Hash] renamed json data from SR
+  # @return [Hash] combined params
   def combine_params(renamed_params, url_params)
     params_combinator = ParamsOperators::Combinator.new(renamed_params, url_params)
     params_combinator.run
   end
 
   ##
+  # Changes data format from one to another
   #
-  def change_format(params, from_format, to_format)
-    # params.lol
-    # from_format.lol
-    # to_format.lol
-    FormatChanger.send("from_#{from_format}_to_#{to_format}", params)
+  # @param from_format [Symbol]
+  # @param to_format [Symbol]
+  # @return [?] Data of to_format format
+  # @example
+  #   change_format(data, :xml, :hash)
+  def change_format(data, from_format, to_format)
+    FormatChanger.send("from_#{from_format}_to_#{to_format}", data)
   end
 
   ##
+  # Sends data to a remote service
   #
-  #
-  #
-  # @todo: get right response body
+  # @param data [Hash] data to be sent
+  # @param url [String] url to send data to
+  # @return [String] Response from remote service
+  # @todo use real body here
   def send_data(data, url)
     content_type = 'application/x-www-form-urlencoded'
     response = Requester.request(url, data, content_type)
@@ -66,8 +83,12 @@ class ServicesCommunicator
   end
 
   ##
+  # Retrieves data required for certain action from data given
   #
-  def get_result(data, action)
+  # @param data [Hash] data to be sent
+  # @param action [Symbol] action type
+  # @return [Hash] result data
+  def filter_data(data, action)
     params_combinator = ParamsOperators::Retriever.new(data, action)
     params_combinator.run
   end

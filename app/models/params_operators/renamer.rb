@@ -1,5 +1,5 @@
 ##
-#
+# Renames received JSON data from SR for remote service requirements using guides for a certain action
 class ParamsOperators::Renamer
   attr_accessor :data, :action
 
@@ -9,23 +9,29 @@ class ParamsOperators::Renamer
   end
 
   ##
+  # Main execution method
   #
+  # @return [Hash] renamed params
   def run
-    guides = get_guides(action)
-    rename_json(guides)
+    rename_keys(guides)
   end
 
   private
 
   ##
+  # Gets input guides for current action
   #
-  def get_guides(action)
-    Guides::GuidesRetriever.get_guides(action).input
+  # @return [Array of Hash]
+  def guides
+    @guides ||= Guides::GuidesRetriever.get_guides(action).input
   end
 
   ##
+  # Renames keys of received params using guides
   #
-  def rename_json(guides)
+  # @param guides [Array of Hash]
+  # @return [Hash] renamed params
+  def rename_keys(guides)
     parsed_result = {}
     data.each do |key, value|
       xml_name = guides.find { |hash| hash[:input] == key }[:result]

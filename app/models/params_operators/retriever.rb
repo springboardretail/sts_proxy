@@ -1,5 +1,5 @@
 ##
-#
+# Gets required data from received response by using output guides for current action
 class ParamsOperators::Retriever
   attr_accessor :data, :action
 
@@ -9,22 +9,28 @@ class ParamsOperators::Retriever
   end
 
   ##
+  # Main execution method
   #
+  # @return [Hash] result data
   def run
-    guides = get_guides(action)
     retrieve_info(guides)
   end
 
   private
 
   ##
+  # Gets output guides for current action
   #
-  def get_guides(action)
-    Guides::GuidesRetriever.get_guides(action).output
+  # @return [Array of Hash]
+  def guides
+    @guides ||= Guides::GuidesRetriever.get_guides(action).output
   end
 
   ##
+  # Retrieves needed info from data using guides
   #
+  # @param guides [Array of Hash]
+  # @return [Hash] needed info
   def retrieve_info(guides)
     result = {}
     guides.each do |guide|

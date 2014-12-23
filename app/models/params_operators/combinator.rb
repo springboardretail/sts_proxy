@@ -1,5 +1,5 @@
 ##
-#
+# Combines json and url params together so that they are ready to be sent to a remote service
 class ParamsOperators::Combinator
   attr_accessor :json_params, :url_params
 
@@ -8,6 +8,10 @@ class ParamsOperators::Combinator
     @url_params = url_params
   end
 
+  ##
+  # Main execution method
+  #
+  # @return [Hash] combined params
   def run
     json_params.merge(url_params)
   end
