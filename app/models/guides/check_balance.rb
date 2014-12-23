@@ -1,11 +1,20 @@
 require './app/models/guides/base'
 
 class Guides::CheckBalance < Guides::Base
-  def guides
+  def input
     [
       {
         input: 'number',
         result: 'Card_Number'
+      }
+    ]
+  end
+
+  def output
+    [
+      {
+        input: 'Response/Amount_Balance',
+        result: 'balance'
       }
     ]
   end

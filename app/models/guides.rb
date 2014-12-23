@@ -1,1 +1,3 @@
-module Guides ; end
+module Guides
+  ;
+end
