@@ -4,7 +4,8 @@ class GuidesRetrieverSpec < StsProxySpec
   describe Guides::GuidesRetriever do
     describe '.get_guides' do
       it 'returns guides for a given action' do
-        #todo implement me
+        action = 'check_balance'
+        Guides::GuidesRetriever.get_guides(action).must_be_instance_of Guides::CheckBalance
       end
     end
   end
