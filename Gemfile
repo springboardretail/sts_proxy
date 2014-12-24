@@ -31,7 +31,11 @@ group :development do
 end
 
 group :test do
+  # Colourful minitest results
   gem 'minitest-reporters'
+
+  # Creates XML for test purposes
+  gem 'builder'
 end
 
 # For creating HTTP requests
