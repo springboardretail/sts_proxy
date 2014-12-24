@@ -1,5 +1,4 @@
 require 'sinatra'
-require 'better_errors'
 require 'active_support/core_ext/array/conversions'
 require 'active_support/core_ext/hash/conversions'
 require 'patron'
@@ -14,6 +13,7 @@ class App < Sinatra::Base
   end
 
   configure :development do
+    require 'better_errors'
     use BetterErrors::Middleware
   end
 end
