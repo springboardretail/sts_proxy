@@ -27,6 +27,11 @@ group :development do
   gem 'guard'
   gem 'guard-bundler'
   gem 'guard-rack'
+  gem 'guard-minitest'
+end
+
+group :test do
+  gem 'minitest-reporters'
 end
 
 # For creating HTTP requests

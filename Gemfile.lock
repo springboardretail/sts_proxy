@@ -7,6 +7,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    ansi (1.4.3)
     backports (3.6.4)
     better_errors (2.0.0)
       coderay (>= 1.0.0)
@@ -36,6 +37,9 @@ GEM
       guard (~> 2.2)
       guard-compat (~> 1.1)
     guard-compat (1.1.0)
+    guard-minitest (2.3.2)
+      guard (~> 2.0)
+      minitest (>= 3.0)
     guard-rack (2.0.0)
       ffi
       guard (~> 2.3)
@@ -54,6 +58,11 @@ GEM
     lumberjack (1.0.9)
     method_source (0.8.2)
     minitest (5.4.2)
+    minitest-reporters (1.0.8)
+      ansi
+      builder
+      minitest (>= 5.0)
+      ruby-progressbar
     multi_json (1.10.1)
     nenv (0.1.1)
     patron (0.4.18)
@@ -69,6 +78,7 @@ GEM
     rb-fsevent (0.9.4)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
+    ruby-progressbar (1.7.1)
     sinatra (1.4.5)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -107,7 +117,9 @@ DEPENDENCIES
   builder
   guard
   guard-bundler
+  guard-minitest
   guard-rack
+  minitest-reporters
   patron
   sinatra
   sinatra-reloader
