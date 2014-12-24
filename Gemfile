@@ -15,9 +15,6 @@ gem 'sinatra-reloader'
 gem 'builder'
 gem 'activesupport'
 
-# Common extensions for sinatra
-# gem 'sinatra-contrib'
-
 group :development do
   # Advanced interactive error handling
   gem 'better_errors'
@@ -33,9 +30,6 @@ end
 group :test do
   # Colourful minitest results
   gem 'minitest-reporters'
-
-  # Creates XML for test purposes
-  gem 'builder'
 end
 
 # For creating HTTP requests
