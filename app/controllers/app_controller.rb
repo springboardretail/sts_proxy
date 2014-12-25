@@ -1,6 +1,10 @@
 ##
 # Main controller
 class AppController < App
+  get '/' do
+    "<h1>Hi. Please refer to <a href='https://github.com/cbrwizard/sts_proxy'>code repo</a> in order to learn how to use this app.</h1>"
+  end
+
   ##
   # Checks balance of a gift card using STS
   post '/v1/check_balance' do
