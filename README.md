@@ -5,3 +5,6 @@
 
 ## How to run tests
 1. `$ rake test`
+
+## Where to visit
+1. https://sts-proxy.herokuapp.com/
