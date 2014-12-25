@@ -9,6 +9,8 @@ include Rack::Test::Methods
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 require './app/app'
+require './app/models/params_operators'
+require './app/models/guides'
 Dir['./lib/**/*.rb'].each { |file| require file }
 Dir['./app/**/*.rb'].each { |file| require file }
 
