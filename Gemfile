@@ -30,6 +30,9 @@ end
 group :test do
   # Colourful minitest results
   gem 'minitest-reporters'
+
+  # Needed for testing requests
+  gem 'rack-test'
 end
 
 # For creating HTTP requests

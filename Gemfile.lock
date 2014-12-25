@@ -121,6 +121,7 @@ DEPENDENCIES
   guard-rack
   minitest-reporters
   patron
+  rack-test
   sinatra
   sinatra-reloader
   thin
