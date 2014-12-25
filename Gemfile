@@ -40,3 +40,6 @@ end
 
 # For creating HTTP requests
 gem 'patron'
+
+# New relic
+gem 'newrelic_rpm'
