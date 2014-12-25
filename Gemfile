@@ -8,6 +8,9 @@ gem 'thin'
 # Main framework
 gem 'sinatra'
 
+# Rake commands
+gem 'rake'
+
 # Automatic server reloader on files change
 gem 'sinatra-reloader'
 
@@ -30,10 +33,10 @@ end
 group :test do
   # Colourful minitest results
   gem 'minitest-reporters'
-end
 
-# Needed for testing requests
-gem 'rack-test'
+  # Needed for testing requests
+  gem 'rack-test'
+end
 
 # For creating HTTP requests
 gem 'patron'
