@@ -21,7 +21,7 @@ class Requester
     # @param content_type [String]
     # @return [Hash] Patron response
     def request(endpoint, body, content_type)
-      http.post endpoint, body, 'Content-Type' => content_type, 'Content-Length' => 9001
+      http.post endpoint, body, 'Content-Type' => content_type
     end
   end
 end
