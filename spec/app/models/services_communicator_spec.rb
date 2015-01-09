@@ -2,11 +2,11 @@ require './spec/spec_helper'
 
 class ServicesCommunicatorSpec < StsProxySpec
   describe ServicesCommunicator do
-    let(:json_params) { { 'number' => 11111} }
-    let(:url_params) { {'Merchant_Number' => 111, 'Terminal_ID' => 111, 'Action_Code' => 05} }
+    let(:json_params) { { 'number' => 711806200498407} }
+    let(:url_params) { {'Merchant_Number' => 111111111111, 'Terminal_ID' => 220, 'Action_Code' => 05} }
     let(:action) { :check_balance }
-    # let(:sts_url) { 'https://www.smart-transactions.com/testgateway.php' }
-    let(:sts_url) { 'google.ru' }
+    let(:sts_url) { 'https://www.smart-transactions.com/gateway_no_lrc.php' }
+    # let(:sts_url) { 'google.ru' }
 
     let(:subject) { ServicesCommunicator.new(json_params, url_params, action) }
 
