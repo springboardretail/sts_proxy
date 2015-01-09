@@ -9,8 +9,11 @@
 # @param action [Symbol] action type
 class ServicesCommunicator
   attr_accessor :json_params, :url_params, :action
-  STS_URL = 'https://www.smart-transactions.com/testgateway.php'
+  STS_URL = 'google.ru'
   #todo: remove these responses for a correct url
+  ERROR_RESPONSE = '<Response><Response_Code>01</Response_Code>
+<Response_Text>DECLINE 10 CARD BALANCE: $2.04</Response_Text><Amount_Balance>2.04</Amount_Balance>
+<Trans_Date_Time>061010140016</Trans_Date_Time><Transaction_ID>206290</Transaction_ID></Response>'
   CHECK_BALANCE_RESPONSE = '<Response><Response_Code>00</Response_Code><Response_Text>311421</Response_Text><Auth_Reference>0001</Auth_Reference>
 <Amount_Balance>0.00</Amount_Balance><Expiration_Date>092429</Expiration_Date><Trans_Date_Time>060710105839</Trans_Date_Time>
 <Card_Number>711194103319309</Card_Number><Transaction_ID>56</Transaction_ID></Response>'
@@ -38,6 +41,8 @@ class ServicesCommunicator
 
     received_data = send_data(data_to_send, STS_URL)
     data_to_read = change_format(received_data, :xml, :hash)
+    error_hash = errors(data_to_read)
+    return error_hash if error_hash.present?
     filter_data(data_to_read, action)
   end
 
@@ -89,6 +94,12 @@ class ServicesCommunicator
     response = Requester.request(url, data, content_type)
     response.body
     CHECK_BALANCE_RESPONSE
+    # ERROR_RESPONSE
+  end
+
+  def errors(data)
+    error_handler = ErrorHandler.new(data)
+    error_handler.run
   end
 
   ##
