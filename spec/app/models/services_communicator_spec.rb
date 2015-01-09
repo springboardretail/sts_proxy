@@ -9,8 +9,8 @@ class ServicesCommunicatorSpec < StsProxySpec
     let(:json_params) { { 'number' => card_number} }
     let(:url_params) { {'Merchant_Number' => 111111111111, 'Terminal_ID' => 220, 'Action_Code' => 05} }
     let(:action) { :check_balance }
-    # let(:sts_url) { 'https://www.smart-transactions.com/gateway_no_lrc.php' }
-    let(:sts_url) { 'google.ru' }
+    let(:sts_url) { 'https://www.smart-transactions.com/gateway_no_lrc.php' }
+    # let(:sts_url) { 'google.ru' }
 
     let(:subject) { ServicesCommunicator.new(json_params, url_params, action) }
 
