@@ -4,6 +4,7 @@ require 'minitest/autorun'
 require 'rack/test'
 require 'minitest/reporters'
 require 'builder'
+require 'maxitest/autorun'
 include Rack::Test::Methods
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new

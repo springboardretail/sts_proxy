@@ -56,6 +56,8 @@ GEM
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
     lumberjack (1.0.9)
+    maxitest (1.1.2)
+      minitest (>= 5.0.0, < 5.5.0)
     method_source (0.8.2)
     minitest (5.4.2)
     minitest-reporters (1.0.8)
@@ -121,6 +123,7 @@ DEPENDENCIES
   guard-bundler
   guard-minitest
   guard-rack
+  maxitest
   minitest-reporters
   newrelic_rpm
   patron

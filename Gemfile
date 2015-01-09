@@ -43,3 +43,6 @@ gem 'patron'
 
 # New relic
 gem 'newrelic_rpm'
+
+# Additional methods for minitest
+gem 'maxitest'

@@ -5,7 +5,8 @@ class ServicesCommunicatorSpec < StsProxySpec
     let(:json_params) { { 'number' => 11111} }
     let(:url_params) { {'Merchant_Number' => 111, 'Terminal_ID' => 111, 'Action_Code' => 05} }
     let(:action) { :check_balance }
-    let(:sts_url) { 'https://www.smart-transactions.com/testgateway.php' }
+    # let(:sts_url) { 'https://www.smart-transactions.com/testgateway.php' }
+    let(:sts_url) { 'google.ru' }
 
     let(:subject) { ServicesCommunicator.new(json_params, url_params, action) }
 
@@ -65,6 +66,26 @@ class ServicesCommunicatorSpec < StsProxySpec
       it 'returns data from a remote url' do
         skip 'must receive real response'
         assert_equal received_data, 'real response'
+      end
+    end
+
+    describe '#errors' do
+      context 'error response' do
+        error_response = { "Response" => { "Response_Code" => "01",
+                                           "Response_Text" => "DECLINE 10 CARD BALANCE: $2.04",
+                                           "Amount_Balance" => "2.04", "Trans_Date_Time" => "061010140016",
+                                           "Transaction_ID" => "206290" }
+        }
+
+        it 'returns a hash with an error message' do
+          assert_equal subject.send(:errors, error_response), { "message" => "DECLINE 10 CARD BALANCE: $2.04" }
+        end
+      end
+
+      context 'successful response' do
+        it 'returns an empty hash' do
+          assert_equal subject.send(:errors, formatted_to_hash), {}
+        end
       end
     end
 
