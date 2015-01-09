@@ -2,7 +2,11 @@ require './spec/spec_helper'
 
 class ServicesCommunicatorSpec < StsProxySpec
   describe ServicesCommunicator do
-    let(:json_params) { { 'number' => 711806200498407} }
+    let(:card_number) { 711806200498407 }
+    let(:merchant_number) { 111111111111 }
+    let(:terminal_id) { 220 }
+
+    let(:json_params) { { 'number' => card_number} }
     let(:url_params) { {'Merchant_Number' => 111111111111, 'Terminal_ID' => 220, 'Action_Code' => 05} }
     let(:action) { :check_balance }
     let(:sts_url) { 'https://www.smart-transactions.com/gateway_no_lrc.php' }
@@ -25,14 +29,14 @@ class ServicesCommunicatorSpec < StsProxySpec
 
     describe '#rename_params' do
       it 'returns renamed hash params for a certain action' do
-        assert_equal renamed_params, { 'Card_Number' => 11111 }
+        assert_equal renamed_params, { 'Card_Number' => card_number }
       end
     end
 
     describe '#combine_params' do
       it 'returns two combined hashes' do
         assert_equal combined_params,
-                     { 'Card_Number' => 11111, 'Merchant_Number' => 111, 'Terminal_ID' => 111, 'Action_Code' => 05 }
+                     { 'Card_Number' => card_number, 'Merchant_Number' => merchant_number, 'Terminal_ID' => terminal_id, 'Action_Code' => 05 }
       end
     end
 
@@ -41,9 +45,9 @@ class ServicesCommunicatorSpec < StsProxySpec
         xml_builder = Builder::XmlMarkup.new(indent: 2)
         xml_builder.instruct! :xml, version: '1.0', encoding: 'UTF-8'
         xml_builder.tag!('Request') {
-          xml_builder.tag! 'Card_Number', 11111
-          xml_builder.tag! 'Merchant_Number', 111
-          xml_builder.tag! 'Terminal_ID', 111
+          xml_builder.tag! 'Card_Number', card_number
+          xml_builder.tag! 'Merchant_Number', merchant_number
+          xml_builder.tag! 'Terminal_ID', terminal_id
           xml_builder.tag! 'Action_Code', 05
         }
       end
@@ -51,7 +55,7 @@ class ServicesCommunicatorSpec < StsProxySpec
       let(:expected_hash) { { "Response" => { "Response_Code" => "00", "Response_Text" => "311421",
                                               "Auth_Reference" => "0001", "Amount_Balance" => "0.00",
                                               "Expiration_Date" => "092429", "Trans_Date_Time" => "060710105839",
-                                              "Card_Number" => "711194103319309", "Transaction_ID" => "56" } } }
+                                              "Card_Number" => card_number.to_s, "Transaction_ID" => "56" } } }
 
       it 'converts hash to xml' do
         assert_equal formatted_to_xml, expected_xml
