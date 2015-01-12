@@ -94,8 +94,8 @@ class ServicesCommunicator
     content_type = 'application/x-www-form-urlencoded'
     # content_type = :xml
     response = Requester.request(url, data, content_type)
-    response.body
-    CHECK_BALANCE_RESPONSE
+    # response.body
+    # CHECK_BALANCE_RESPONSE
     # ERROR_RESPONSE
   end
 
