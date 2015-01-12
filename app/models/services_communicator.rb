@@ -9,8 +9,8 @@
 # @param action [Symbol] action type
 class ServicesCommunicator
   attr_accessor :json_params, :url_params, :action
-  # STS_URL = 'google.ru'
-  STS_URL = 'https://www.smart-transactions.com/gateway_no_lrc.php'
+  STS_URL = 'http://httpbin.org/post'
+  # STS_URL = 'https://www.smart-transactions.com/gateway_no_lrc.php'
   #todo: remove these responses for a correct url
   ERROR_RESPONSE = '<Response><Response_Code>01</Response_Code>
 <Response_Text>DECLINE 10 CARD BALANCE: $2.04</Response_Text><Amount_Balance>2.04</Amount_Balance>
@@ -92,9 +92,10 @@ class ServicesCommunicator
   # @todo use real body here
   def send_data(data, url)
     content_type = 'application/x-www-form-urlencoded'
+    # content_type = :xml
     response = Requester.request(url, data, content_type)
     response.body
-    # CHECK_BALANCE_RESPONSE
+    CHECK_BALANCE_RESPONSE
     # ERROR_RESPONSE
   end
 

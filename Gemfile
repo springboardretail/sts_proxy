@@ -39,7 +39,7 @@ group :test do
 end
 
 # For creating HTTP requests
-gem 'patron'
+gem 'rest-client'
 
 # New relic
 gem 'newrelic_rpm'

@@ -59,6 +59,7 @@ GEM
     maxitest (1.1.2)
       minitest (>= 5.0.0, < 5.5.0)
     method_source (0.8.2)
+    mime-types (2.4.3)
     minitest (5.4.2)
     minitest-reporters (1.0.8)
       ansi
@@ -67,8 +68,8 @@ GEM
       ruby-progressbar
     multi_json (1.10.1)
     nenv (0.1.1)
+    netrc (0.10.2)
     newrelic_rpm (3.9.8.273)
-    patron (0.4.18)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -82,6 +83,9 @@ GEM
     rb-fsevent (0.9.4)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
+    rest-client (1.7.2)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
     ruby-progressbar (1.7.1)
     sinatra (1.4.5)
       rack (~> 1.4)
@@ -126,9 +130,9 @@ DEPENDENCIES
   maxitest
   minitest-reporters
   newrelic_rpm
-  patron
   rack-test
   rake
+  rest-client
   sinatra
   sinatra-reloader
   thin

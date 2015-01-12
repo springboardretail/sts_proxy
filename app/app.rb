@@ -2,7 +2,7 @@ require 'sinatra'
 require 'json'
 require 'active_support/core_ext/array/conversions'
 require 'active_support/core_ext/hash/conversions'
-require 'patron'
+require 'rest_client'
 
 ##
 # Global configurations
