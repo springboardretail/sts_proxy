@@ -4,7 +4,6 @@ class FormatChangerSpec < StsProxySpec
   describe FormatChanger do
     let(:xml) do
       xml_builder = Builder::XmlMarkup.new(indent: 2)
-      xml_builder.instruct! :xml, version: '1.0', encoding: 'UTF-8'
       xml_builder.tag!('Request') {
         xml_builder.key 'value'
         xml_builder.key2 1234

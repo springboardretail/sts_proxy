@@ -10,7 +10,7 @@ class FormatChanger
     # @param [hash]
     # @return [String] XML
     def from_hash_to_xml(hash)
-      hash.to_xml(root: 'Request', skip_types: true, dasherize: false)
+      hash.to_xml(root: 'Request', skip_types: true, dasherize: false, skip_instruct: true)
     end
 
     ##

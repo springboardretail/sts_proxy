@@ -7,10 +7,9 @@ class ServicesCommunicatorSpec < StsProxySpec
     let(:terminal_id) { 220 }
 
     let(:json_params) { { 'number' => card_number} }
-    let(:url_params) { {'Merchant_Number' => 111111111111, 'Terminal_ID' => 220, 'Action_Code' => 05} }
+    let(:url_params) { {'Merchant_Number' => merchant_number, 'Terminal_ID' => terminal_id, 'Action_Code' => '05', 'POS_Entry_Mode' => 'M'} }
     let(:action) { :check_balance }
     let(:sts_url) { 'https://www.smart-transactions.com/gateway_no_lrc.php' }
-    # let(:sts_url) { 'http://httpbin.org/post' }
 
     let(:subject) { ServicesCommunicator.new(json_params, url_params, action) }
 
@@ -20,10 +19,27 @@ class ServicesCommunicatorSpec < StsProxySpec
     let(:received_data) { subject.send(:send_data, formatted_to_xml, sts_url) }
     let(:formatted_to_hash) { subject.send(:change_format, received_data, :xml, :hash) }
     let(:filtered_data) { subject.send(:filter_data, formatted_to_hash, action) }
+    let(:expected_xml) do
+      xml_builder = Builder::XmlMarkup.new(indent: 2)
+      xml_builder.tag!('Request') {
+        xml_builder.tag! 'Card_Number', card_number
+        xml_builder.tag! 'Merchant_Number', merchant_number
+        xml_builder.tag! 'Terminal_ID', terminal_id
+        xml_builder.tag! 'Action_Code', '05'
+        xml_builder.tag! 'POS_Entry_Mode', 'M'
+      }
+    end
+    let(:expected_hash) { { 'Response' => {
+      'Response_Code' => '00', 'Response_Text' => formatted_to_hash['Response']['Response_Text'],
+      'Auth_Reference' => formatted_to_hash['Response']['Auth_Reference'],
+      'Amount_Balance' => formatted_to_hash['Response']['Amount_Balance'],
+      'Expiration_Date' => formatted_to_hash['Response']['Expiration_Date'],
+      'Trans_Date_Time' => formatted_to_hash['Response']['Trans_Date_Time'],
+      'Card_Number' => card_number.to_s, 'Transaction_ID' => formatted_to_hash['Response']['Transaction_ID'] } } }
 
     describe '#run' do
       it 'returns a data hash from a remote server' do
-        assert_equal subject.run, { "balance" => "0.00" }
+        assert_instance_of Float, filtered_data["balance"].to_f
       end
     end
 
@@ -36,27 +52,11 @@ class ServicesCommunicatorSpec < StsProxySpec
     describe '#combine_params' do
       it 'returns two combined hashes' do
         assert_equal combined_params,
-                     { 'Card_Number' => card_number, 'Merchant_Number' => merchant_number, 'Terminal_ID' => terminal_id, 'Action_Code' => 05 }
+                     { 'Card_Number' => card_number, 'Merchant_Number' => merchant_number, 'Terminal_ID' => terminal_id, 'Action_Code' => '05', 'POS_Entry_Mode' => 'M' }
       end
     end
 
     describe '#change_format' do
-      let(:expected_xml) do
-        xml_builder = Builder::XmlMarkup.new(indent: 2)
-        xml_builder.instruct! :xml, version: '1.0', encoding: 'UTF-8'
-        xml_builder.tag!('Request') {
-          xml_builder.tag! 'Card_Number', card_number
-          xml_builder.tag! 'Merchant_Number', merchant_number
-          xml_builder.tag! 'Terminal_ID', terminal_id
-          xml_builder.tag! 'Action_Code', 05
-        }
-      end
-
-      let(:expected_hash) { { "Response" => { "Response_Code" => "00", "Response_Text" => "311421",
-                                              "Auth_Reference" => "0001", "Amount_Balance" => "0.00",
-                                              "Expiration_Date" => "092429", "Trans_Date_Time" => "060710105839",
-                                              "Card_Number" => card_number.to_s, "Transaction_ID" => "56" } } }
-
       it 'converts hash to xml' do
         assert_equal formatted_to_xml, expected_xml
       end
@@ -68,8 +68,7 @@ class ServicesCommunicatorSpec < StsProxySpec
 
     describe '#send_data' do
       it 'returns data from a remote url' do
-        skip 'must receive real response'
-        assert_equal received_data, 'real response'
+        assert_equal Hash.from_xml(received_data), expected_hash
       end
     end
 
@@ -95,7 +94,7 @@ class ServicesCommunicatorSpec < StsProxySpec
 
     describe '#filter_data' do
       it 'returns only a required data for a certain action' do
-        assert_equal filtered_data, { "balance" => "0.00" }
+        assert_instance_of Float, filtered_data["balance"].to_f
       end
     end
   end
