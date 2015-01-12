@@ -44,6 +44,12 @@ class AppController < App
     json_params = JSON.parse(request.body.read)
     services_communicator = ServicesCommunicator.new(json_params, params, action)
     response = services_communicator.run
-    response.empty? ? nil : response.to_json
+    if response.empty?
+      result = nil
+    else
+      result = response.to_json
+      status 500 if result['message']
+    end
+    result
   end
 end
