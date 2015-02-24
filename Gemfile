@@ -18,7 +18,16 @@ gem 'sinatra-reloader'
 gem 'builder'
 gem 'activesupport'
 
+# For creating HTTP requests
+gem 'rest-client'
+
+# New relic
+gem 'newrelic_rpm'
+
 group :development do
+  # Interactive REPL
+  gem 'pry'
+
   # Advanced interactive error handling
   gem 'better_errors'
   gem 'binding_of_caller'
@@ -36,13 +45,11 @@ group :test do
 
   # Needed for testing requests
   gem 'rack-test'
+
+  # For mocking out and replaying interactions with external services
+  gem 'vcr'
+  gem 'webmock'
+
+  # Additional methods for minitest
+  gem 'maxitest'
 end
-
-# For creating HTTP requests
-gem 'rest-client'
-
-# New relic
-gem 'newrelic_rpm'
-
-# Additional methods for minitest
-gem 'maxitest'

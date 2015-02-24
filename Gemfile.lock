@@ -7,6 +7,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    addressable (2.3.7)
     ansi (1.4.3)
     backports (3.6.4)
     better_errors (2.0.0)
@@ -19,6 +20,8 @@ GEM
     celluloid (0.16.0)
       timers (~> 4.0.0)
     coderay (1.1.0)
+    crack (0.4.2)
+      safe_yaml (~> 1.0.0)
     daemons (1.1.9)
     debug_inspector (0.0.2)
     erubis (2.7.0)
@@ -87,6 +90,7 @@ GEM
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
     ruby-progressbar (1.7.1)
+    safe_yaml (1.0.4)
     sinatra (1.4.5)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -114,6 +118,10 @@ GEM
       hitimes
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    vcr (2.9.3)
+    webmock (1.20.4)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
 
 PLATFORMS
   ruby
@@ -130,9 +138,12 @@ DEPENDENCIES
   maxitest
   minitest-reporters
   newrelic_rpm
+  pry
   rack-test
   rake
   rest-client
   sinatra
   sinatra-reloader
   thin
+  vcr
+  webmock

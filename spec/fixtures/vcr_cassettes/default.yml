@@ -1,0 +1,96 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://www.smart-transactions.com/gateway_no_lrc.php
+    body:
+      encoding: UTF-8
+      string: |
+        <Request>
+          <Card_Number>711806200498407</Card_Number>
+          <Merchant_Number>111111111111</Merchant_Number>
+          <Terminal_ID>220</Terminal_ID>
+          <Action_Code>05</Action_Code>
+          <POS_Entry_Mode>M</POS_Entry_Mode>
+        </Request>
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/xml
+      Content-Length:
+      - '218'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Microsoft-IIS/5.0
+      Date:
+      - Tue, 24 Feb 2015 14:06:53 GMT
+      X-Powered-By:
+      - ASP.NET
+      Connection:
+      - close
+      Content-Type:
+      - text/html
+      Content-Length:
+      - '334'
+    body:
+      encoding: UTF-8
+      string: "<Response><Response_Code>00</Response_Code><Response_Text>748418</Response_Text><Auth_Reference>0043</Auth_Reference><Amount_Balance>940.23</Amount_Balance><Expiration_Date>021935</Expiration_Date><Trans_Date_Time>022415070522</Trans_Date_Time><Card_Number>711806200498407</Card_Number><Transaction_ID>1</Transaction_ID></Response>"
+    http_version: 
+  recorded_at: Tue, 24 Feb 2015 14:05:25 GMT
+- request:
+    method: post
+    uri: http://httpbin.org/post
+    body:
+      encoding: UTF-8
+      string: '{"key":"value"}'
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '15'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Tue, 24 Feb 2015 14:05:25 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '417'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+    body:
+      encoding: UTF-8
+      string: "{\n  \"args\": {}, \n  \"data\": \"{\\\"key\\\":\\\"value\\\"}\", \n
+        \ \"files\": {}, \n  \"form\": {}, \n  \"headers\": {\n    \"Accept\": \"*/*;
+        q=0.5, application/xml\", \n    \"Accept-Encoding\": \"gzip, deflate\", \n
+        \   \"Content-Length\": \"15\", \n    \"Content-Type\": \"application/json\",
+        \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"Ruby\"\n  }, \n  \"json\":
+        {\n    \"key\": \"value\"\n  }, \n  \"origin\": \"184.75.193.46\", \n  \"url\":
+        \"http://httpbin.org/post\"\n}\n"
+    http_version: 
+  recorded_at: Tue, 24 Feb 2015 14:05:25 GMT
+recorded_with: VCR 2.9.3
