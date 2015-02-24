@@ -27,7 +27,11 @@ end
 
 class StsProxySpec < MiniTest::Spec
   around do |test|
-    VCR.use_cassette('default', record: :new_episodes) do
+    vcr_options = {
+      record: :new_episodes,
+      match_requests_on: [:method, :uri, :headers, :body]
+    }
+    VCR.use_cassette('default', vcr_options) do
       test.call
     end
   end

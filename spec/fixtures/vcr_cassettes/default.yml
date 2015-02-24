@@ -32,7 +32,85 @@ http_interactions:
       Server:
       - Microsoft-IIS/5.0
       Date:
-      - Tue, 24 Feb 2015 14:06:53 GMT
+      - Tue, 24 Feb 2015 14:14:46 GMT
+      X-Powered-By:
+      - ASP.NET
+      Connection:
+      - close
+      Content-Type:
+      - text/html
+      Content-Length:
+      - '337'
+    body:
+      encoding: UTF-8
+      string: "<Response><Response_Code>00</Response_Code><Response_Text>942268</Response_Text><Auth_Reference>0048</Auth_Reference><Amount_Balance>940.23</Amount_Balance><Expiration_Date>021935</Expiration_Date><Trans_Date_Time>022415071316</Trans_Date_Time><Card_Number>711806200498407</Card_Number><Transaction_ID>1234</Transaction_ID></Response>"
+    http_version: 
+  recorded_at: Tue, 24 Feb 2015 14:13:18 GMT
+- request:
+    method: post
+    uri: https://www.smart-transactions.com/gateway_no_lrc.php
+    body:
+      encoding: UTF-8
+      string: <Request><Card_Number>711806200498407</Card_Number><Merchant_Number>111111111111</Merchant_Number><Terminal_ID>220</Terminal_ID><Action_Code>05</Action_Code><POS_Entry_Mode>M</POS_Entry_Mode><{"number":711806200498407}nil="true"/></Request>
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/xml
+      Content-Length:
+      - '240'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Microsoft-IIS/5.0
+      Date:
+      - Tue, 24 Feb 2015 14:14:48 GMT
+      X-Powered-By:
+      - ASP.NET
+      Connection:
+      - close
+      Content-Type:
+      - text/html
+      Content-Length:
+      - '337'
+    body:
+      encoding: UTF-8
+      string: "<Response><Response_Code>00</Response_Code><Response_Text>503742</Response_Text><Auth_Reference>0049</Auth_Reference><Amount_Balance>940.23</Amount_Balance><Expiration_Date>021935</Expiration_Date><Trans_Date_Time>022415071318</Trans_Date_Time><Card_Number>711806200498407</Card_Number><Transaction_ID>1234</Transaction_ID></Response>"
+    http_version: 
+  recorded_at: Tue, 24 Feb 2015 14:13:21 GMT
+- request:
+    method: post
+    uri: https://www.smart-transactions.com/gateway_no_lrc.php
+    body:
+      encoding: UTF-8
+      string: <Request><Card_Number>711806200498407</Card_Number><Transaction_Amount>1</Transaction_Amount><Transaction_ID>1</Transaction_ID><Merchant_Number>111111111111</Merchant_Number><Terminal_ID>220</Terminal_ID><Action_Code>01</Action_Code><POS_Entry_Mode>M</POS_Entry_Mode><{"number":711806200498407,"amount":1,"payment_id":1}nil="true"/></Request>
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/xml
+      Content-Length:
+      - '342'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Microsoft-IIS/5.0
+      Date:
+      - Tue, 24 Feb 2015 14:14:51 GMT
       X-Powered-By:
       - ASP.NET
       Connection:
@@ -43,9 +121,9 @@ http_interactions:
       - '334'
     body:
       encoding: UTF-8
-      string: "<Response><Response_Code>00</Response_Code><Response_Text>748418</Response_Text><Auth_Reference>0043</Auth_Reference><Amount_Balance>940.23</Amount_Balance><Expiration_Date>021935</Expiration_Date><Trans_Date_Time>022415070522</Trans_Date_Time><Card_Number>711806200498407</Card_Number><Transaction_ID>1</Transaction_ID></Response>"
+      string: "<Response><Response_Code>00</Response_Code><Response_Text>757002</Response_Text><Auth_Reference>0050</Auth_Reference><Amount_Balance>939.23</Amount_Balance><Expiration_Date>021935</Expiration_Date><Trans_Date_Time>022415071321</Trans_Date_Time><Card_Number>711806200498407</Card_Number><Transaction_ID>1</Transaction_ID></Response>"
     http_version: 
-  recorded_at: Tue, 24 Feb 2015 14:05:25 GMT
+  recorded_at: Tue, 24 Feb 2015 14:13:24 GMT
 - request:
     method: post
     uri: http://httpbin.org/post
@@ -71,7 +149,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Tue, 24 Feb 2015 14:05:25 GMT
+      - Tue, 24 Feb 2015 14:13:24 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -92,5 +170,44 @@ http_interactions:
         {\n    \"key\": \"value\"\n  }, \n  \"origin\": \"184.75.193.46\", \n  \"url\":
         \"http://httpbin.org/post\"\n}\n"
     http_version: 
-  recorded_at: Tue, 24 Feb 2015 14:05:25 GMT
+  recorded_at: Tue, 24 Feb 2015 14:13:24 GMT
+- request:
+    method: post
+    uri: https://www.smart-transactions.com/gateway_no_lrc.php
+    body:
+      encoding: UTF-8
+      string: <Request><Card_Number>711806200498407</Card_Number><Transaction_Amount>1</Transaction_Amount><Transaction_ID>1</Transaction_ID><Merchant_Number>111111111111</Merchant_Number><Terminal_ID>220</Terminal_ID><Action_Code>02</Action_Code><POS_Entry_Mode>M</POS_Entry_Mode><{"number":711806200498407,"amount":1,"payment_id":1}nil="true"/></Request>
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/xml
+      Content-Length:
+      - '342'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Microsoft-IIS/5.0
+      Date:
+      - Tue, 24 Feb 2015 14:14:54 GMT
+      X-Powered-By:
+      - ASP.NET
+      Connection:
+      - close
+      Content-Type:
+      - text/html
+      Content-Length:
+      - '334'
+    body:
+      encoding: UTF-8
+      string: "<Response><Response_Code>00</Response_Code><Response_Text>765061</Response_Text><Auth_Reference>0051</Auth_Reference><Amount_Balance>940.23</Amount_Balance><Expiration_Date>021935</Expiration_Date><Trans_Date_Time>022415071324</Trans_Date_Time><Card_Number>711806200498407</Card_Number><Transaction_ID>1</Transaction_ID></Response>"
+    http_version: 
+  recorded_at: Tue, 24 Feb 2015 14:13:26 GMT
 recorded_with: VCR 2.9.3
