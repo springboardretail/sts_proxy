@@ -2,7 +2,7 @@ require './spec/spec_helper'
 
 class RetrieverSpec < StsProxySpec
   describe ParamsOperators::Retriever do
-    let(:data) { {'Response' => { 'Amount_Balance' => 5, 'key2' => '1234' }} }
+    let(:data) { {'Response' => { 'Amount_Balance' => '5.00', 'key2' => '1234' }} }
     let(:action) { 'check_balance' }
     let(:subject) { ParamsOperators::Retriever.new(data, action) }
 

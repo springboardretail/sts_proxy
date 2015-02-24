@@ -39,7 +39,7 @@ class AppController < App
   #     "number" : 11111
   #   }
   #   results in
-  #     {"balance":"0.00"}
+  #     {"balance": 0.00}
   def communicate_with_sts(action)
     json_params = JSON.parse(request.body.read)
     services_communicator = ServicesCommunicator.new(json_params, params, action)

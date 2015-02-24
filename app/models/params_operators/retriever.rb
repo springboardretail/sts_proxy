@@ -35,6 +35,7 @@ class ParamsOperators::Retriever
     result = {}
     guides.each do |guide|
       value = guide[:input].hash_value(data, '/')
+      value = guide[:format].call(value) if guide[:format]
       result[guide[:result]] = value
     end
     result

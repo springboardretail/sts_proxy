@@ -16,7 +16,8 @@ class Guides::CheckBalance < Guides::Base
     [
       {
         input: 'Response/Amount_Balance',
-        result: 'balance'
+        result: 'balance',
+        format: ->(value) { Float(value) }
       }
     ]
   end

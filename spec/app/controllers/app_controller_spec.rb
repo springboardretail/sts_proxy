@@ -9,7 +9,8 @@ class AppControllerSpec < StsProxySpec
         post subject, { number: 711806200498407 }.to_json
         assert last_response.ok?
 
-        assert_instance_of Float, last_response.body['balance'].to_f
+        response_data = JSON.parse(last_response.body)
+        assert_instance_of Float, response_data['balance']
       end
     end
 
