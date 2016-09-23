@@ -2,6 +2,10 @@ require './spec/spec_helper'
 
 class AppControllerSpec < StsProxySpec
   describe AppController do
+    before do
+      header 'Content-Type', 'application/json'
+    end
+
     describe '/check_balance' do
       subject { '/v1/check_balance?Merchant_Number=111111111111&Terminal_ID=220&Action_Code=05&POS_Entry_Mode=M' }
 

@@ -24,7 +24,7 @@ class ServicesCommunicator
   def run
     renamed_params = rename_params(json_params, action)
     combined_params = combine_params(renamed_params, url_params)
-    data_to_send = change_format(combined_params, :hash, :xml).tr("\n  ", '')
+    data_to_send = change_format(combined_params, :hash, :xml)
 
     received_data = send_data(data_to_send, STS_URL)
     data_to_read = change_format(received_data, :xml, :hash)
