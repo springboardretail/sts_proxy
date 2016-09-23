@@ -1,9 +1,7 @@
 source 'https://rubygems.org/'
 
-ruby '2.1.5'
-
 # Rack server
-gem 'thin'
+gem 'puma'
 
 # Main framework
 gem 'sinatra'
