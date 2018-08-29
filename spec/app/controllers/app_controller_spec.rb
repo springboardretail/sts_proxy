@@ -16,6 +16,13 @@ class AppControllerSpec < StsProxySpec
         response_data = JSON.parse(last_response.body)
         assert_instance_of Float, response_data['balance']
       end
+
+      context 'when gift card number is invalid' do
+        it 'returns not found' do
+          post subject, { number: 1234521234 }.to_json
+          assert last_response.not_found?
+        end
+      end
     end
 
     describe '/capture' do

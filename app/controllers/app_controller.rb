@@ -48,8 +48,12 @@ class AppController < App
       result = nil
     else
       result = response.to_json
-      status 500 if result['message']
+      status(resolve_status(response['message'])) if response['message']
     end
     result
+  end
+
+  def resolve_status(result_message)
+    result_message.start_with?('INVALID CARD') ? 404 : 500
   end
 end
