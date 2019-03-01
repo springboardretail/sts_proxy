@@ -11,7 +11,8 @@ class ServicesCommunicatorSpec < StsProxySpec
     let(:action) { :check_balance }
     let(:sts_url) { 'https://www.smart-transactions.com/gateway_no_lrc.php' }
 
-    let(:subject) { ServicesCommunicator.new(json_params, url_params, action) }
+    let(:logger) { Logger.new('/dev/null') }
+    let(:subject) { ServicesCommunicator.new(json_params, url_params, action, logger) }
 
     let(:renamed_params) { subject.send(:rename_params, json_params, action) }
     let(:combined_params) { subject.send(:combine_params, renamed_params, url_params) }
