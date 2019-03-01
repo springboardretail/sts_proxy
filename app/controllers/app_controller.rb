@@ -42,7 +42,7 @@ class AppController < App
   #     {"balance": 0.00}
   def communicate_with_sts(action)
     json_params = JSON.parse(request.body.read)
-    services_communicator = ServicesCommunicator.new(json_params, params, action)
+    services_communicator = ServicesCommunicator.new(json_params, params, action, logger)
     response = services_communicator.run
     if response.empty?
       result = nil

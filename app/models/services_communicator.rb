@@ -11,10 +11,11 @@ class ServicesCommunicator
   attr_accessor :json_params, :url_params, :action
   STS_URL = 'https://www.smart-transactions.com/gateway_no_lrc.php'
 
-  def initialize(json_params, url_params, action)
+  def initialize(json_params, url_params, action, logger)
     @json_params = json_params
     @url_params = url_params
     @action = action
+    @logger = logger
   end
 
   ##
@@ -29,11 +30,14 @@ class ServicesCommunicator
     received_data = send_data(data_to_send, STS_URL)
     data_to_read = change_format(received_data, :xml, :hash)
     error_hash = errors(data_to_read)
+
     return error_hash if error_hash.present?
     filter_data(data_to_read, action)
   end
 
   private
+
+  attr_reader :logger
 
   ##
   # Renames params from SR to STS syntax using guides for a certain action
@@ -76,8 +80,17 @@ class ServicesCommunicator
   # @param url [String] url to send data to
   # @return [String] Response from remote service
   def send_data(data, url)
+    logger.debug('Request to STS:')
+    logger.debug(url)
+    logger.debug(data)
+
     content_type = :xml
     response = Requester.request(url, data, content_type)
+
+    logger.debug("Response from STS: Status #{response.code}")
+    logger.debug(response.headers.inspect)
+    logger.debug(response.body)
+
     response.body
   end
 

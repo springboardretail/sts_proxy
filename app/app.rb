@@ -10,11 +10,12 @@ class App < Sinatra::Base
   set :server, :thin
 
   configure :production, :development do
-    enable :logging
+    set :logging, ENV['DEBUG'] ? Logger::DEBUG : Logger::INFO
   end
 
   configure :development do
     require 'better_errors'
+    set :logging, Logger::DEBUG
     use BetterErrors::Middleware
   end
 end

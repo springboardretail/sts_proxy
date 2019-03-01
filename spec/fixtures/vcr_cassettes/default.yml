@@ -232,4 +232,221 @@ http_interactions:
         \ 12</Response_Text><Amount_Balance>0.00</Amount_Balance><Trans_Date_Time>051518083831</Trans_Date_Time><Transaction_ID>7220aae4cd1b2d43d4fc7bac</Transaction_ID></Response>"
     http_version: 
   recorded_at: Tue, 15 May 2018 14:40:27 GMT
-recorded_with: VCR 2.9.3
+- request:
+    method: post
+    uri: https://www.smart-transactions.com/gateway_no_lrc.php
+    body:
+      encoding: UTF-8
+      string: |
+        <Request>
+          <Card_Number>711806200498407</Card_Number>
+          <Transaction_Amount>1</Transaction_Amount>
+          <Transaction_ID>1</Transaction_ID>
+          <Merchant_Number>111111111111</Merchant_Number>
+          <Terminal_ID>220</Terminal_ID>
+          <Action_Code>01</Action_Code>
+          <POS_Entry_Mode>M</POS_Entry_Mode>
+        </Request>
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      Content-Type:
+      - application/xml
+      Content-Length:
+      - '300'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 01 Mar 2019 19:09:55 GMT
+      Server:
+      - Apache
+      Content-Length:
+      - '332'
+      Content-Type:
+      - text/html; charset=UTF-8
+    body:
+      encoding: UTF-8
+      string: "<Response><Response_Code>00</Response_Code><Response_Text>052731</Response_Text><Auth_Reference>0001</Auth_Reference><Amount_Balance>3399.68</Amount_Balance><Expiration_Date>011239</Expiration_Date><Trans_Date_Time>030119120955</Trans_Date_Time><Card_Number>711806200498407</Card_Number><Transaction_ID>1</Transaction_ID></Response>"
+    http_version: 
+  recorded_at: Fri, 01 Mar 2019 19:14:01 GMT
+- request:
+    method: post
+    uri: https://www.smart-transactions.com/gateway_no_lrc.php
+    body:
+      encoding: UTF-8
+      string: |
+        <Request>
+          <Card_Number>711806200498407</Card_Number>
+          <Merchant_Number>111111111111</Merchant_Number>
+          <Terminal_ID>220</Terminal_ID>
+          <Action_Code>05</Action_Code>
+          <POS_Entry_Mode>M</POS_Entry_Mode>
+        </Request>
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      Content-Type:
+      - application/xml
+      Content-Length:
+      - '218'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 01 Mar 2019 19:09:57 GMT
+      Server:
+      - Apache
+      Content-Length:
+      - '332'
+      Content-Type:
+      - text/html; charset=UTF-8
+    body:
+      encoding: UTF-8
+      string: "<Response><Response_Code>00</Response_Code><Response_Text>775486</Response_Text><Auth_Reference>0002</Auth_Reference><Amount_Balance>3399.68</Amount_Balance><Expiration_Date>011239</Expiration_Date><Trans_Date_Time>030119120957</Trans_Date_Time><Card_Number>711806200498407</Card_Number><Transaction_ID>1</Transaction_ID></Response>"
+    http_version: 
+  recorded_at: Fri, 01 Mar 2019 19:14:02 GMT
+- request:
+    method: post
+    uri: https://www.smart-transactions.com/gateway_no_lrc.php
+    body:
+      encoding: UTF-8
+      string: |
+        <Request>
+          <Card_Number>711806200498407</Card_Number>
+          <Transaction_Amount>1</Transaction_Amount>
+          <Transaction_ID>1</Transaction_ID>
+          <Merchant_Number>111111111111</Merchant_Number>
+          <Terminal_ID>220</Terminal_ID>
+          <Action_Code>02</Action_Code>
+          <POS_Entry_Mode>M</POS_Entry_Mode>
+        </Request>
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      Content-Type:
+      - application/xml
+      Content-Length:
+      - '300'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 01 Mar 2019 19:09:59 GMT
+      Server:
+      - Apache
+      Content-Length:
+      - '332'
+      Content-Type:
+      - text/html; charset=UTF-8
+    body:
+      encoding: UTF-8
+      string: "<Response><Response_Code>00</Response_Code><Response_Text>074399</Response_Text><Auth_Reference>0003</Auth_Reference><Amount_Balance>3400.68</Amount_Balance><Expiration_Date>011239</Expiration_Date><Trans_Date_Time>030119120959</Trans_Date_Time><Card_Number>711806200498407</Card_Number><Transaction_ID>1</Transaction_ID></Response>"
+    http_version: 
+  recorded_at: Fri, 01 Mar 2019 19:14:04 GMT
+- request:
+    method: post
+    uri: http://httpbin.org/post
+    body:
+      encoding: UTF-8
+      string: '{"key":"value"}'
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '15'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 01 Mar 2019 19:10:00 GMT
+      Server:
+      - nginx
+      Content-Length:
+      - '288'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA2WQS0/DMBCE7/kVlk9QJc6jj9DcKoTEgSPcIiE32ToGY1uOgxqi/HfstESpOM7O5/HODgFCmBrW4gINY4i8rKmlTuKhxJ/Ql7go8TcVHZR4xBfixAUsX5yU+VrIBmgNZgKcdINDVYG2PnMVry4Z8zR6kpWquWTeZj9ch6iGk6AWZvBRSQvSRi8gmW08l27/ma+9Bm9RrQWvqOVKxh+tkjP4rNpphcZafeSSKMNm760FEx2Yy/GEgdZGleBOxhlJSIbuBJfdOWKyQ+eH3ftuc49Md+yduyFrnSVb7HKu7adP5+rugj5yOuACUoYz7jGc5jlZ5yTd70mabEN0q68H74z4W70t4nhRIda+VjAGv7D2o5/KAQAA
+    http_version: 
+  recorded_at: Fri, 01 Mar 2019 19:14:05 GMT
+- request:
+    method: post
+    uri: https://www.smart-transactions.com/gateway_no_lrc.php
+    body:
+      encoding: UTF-8
+      string: |
+        <Request>
+          <Card_Number>1234521234</Card_Number>
+          <Merchant_Number>111111111111</Merchant_Number>
+          <Terminal_ID>220</Terminal_ID>
+          <Action_Code>05</Action_Code>
+          <POS_Entry_Mode>M</POS_Entry_Mode>
+        </Request>
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      Content-Type:
+      - application/xml
+      Content-Length:
+      - '213'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 01 Mar 2019 19:10:01 GMT
+      Server:
+      - Apache
+      Content-Length:
+      - '219'
+      Content-Type:
+      - text/html; charset=UTF-8
+    body:
+      encoding: UTF-8
+      string: "<Response><Response_Code>01</Response_Code><Response_Text>INVALID CARD
+        \ 12</Response_Text><Amount_Balance>0.00</Amount_Balance><Trans_Date_Time>030119121001</Trans_Date_Time><Transaction_ID>1</Transaction_ID></Response>"
+    http_version: 
+  recorded_at: Fri, 01 Mar 2019 19:14:06 GMT
+recorded_with: VCR 4.0.0
