@@ -87,7 +87,7 @@ class ServicesCommunicator
     content_type = :xml
     response = Requester.request(url, data, content_type)
 
-    logger.debug("Response from STS: Status #{response.code}")
+    logger.debug("Response from STS: Status #{response.status}")
     logger.debug(response.headers.inspect)
     logger.debug(response.body)
 

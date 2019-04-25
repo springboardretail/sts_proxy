@@ -12,8 +12,10 @@ class Requester
     # @param content_type [String]
     # @return [Hash] Patron response
     def request(endpoint, body, content_type)
-      # RestClient.proxy = 'http://199.200.120.37:7808'
-      RestClient.post endpoint, body, content_type: content_type
+      Excon.post(endpoint, {
+        body: body,
+        headers: { 'Content-Type' => content_type }
+      })
     end
   end
 end

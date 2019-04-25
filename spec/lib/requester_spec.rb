@@ -8,7 +8,7 @@ class RequesterSpec < StsProxySpec
         body = {key: 'value'}.to_json
         content_type = 'application/json'
 
-        assert_equal Requester.request(endpoint, body, content_type).code, 200
+        assert_equal Requester.request(endpoint, body, content_type).status, 200
       end
     end
   end
