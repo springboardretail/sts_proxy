@@ -7,79 +7,6 @@ http_interactions:
       encoding: UTF-8
       string: |
         <Request>
-          <Card_Number>1234521234</Card_Number>
-          <Merchant_Number>111111111111</Merchant_Number>
-          <Terminal_ID>220</Terminal_ID>
-          <Action_Code>05</Action_Code>
-          <POS_Entry_Mode>M</POS_Entry_Mode>
-        </Request>
-    headers:
-      Content-Type:
-      - xml
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Thu, 25 Apr 2019 14:12:55 GMT
-      Server:
-      - Apache
-      X-Powered-By:
-      - PHP/5.6.1
-      Content-Length:
-      - '241'
-      Content-Type:
-      - text/html; charset=UTF-8
-    body:
-      encoding: ASCII-8BIT
-      string: "<Response><Response_Code>01</Response_Code><Response_Text>INVALID CARD
-        \ 12</Response_Text><Amount_Balance>0.00</Amount_Balance><Trans_Date_Time>042519081255</Trans_Date_Time><Transaction_ID>a0P1L00000E0OvQUAV~8302</Transaction_ID></Response>"
-    http_version: 
-  recorded_at: Thu, 25 Apr 2019 14:12:55 GMT
-- request:
-    method: post
-    uri: https://www.smart-transactions.com/gateway_no_lrc.php
-    body:
-      encoding: UTF-8
-      string: |
-        <Request>
-          <Card_Number>711806200498407</Card_Number>
-          <Merchant_Number>111111111111</Merchant_Number>
-          <Terminal_ID>220</Terminal_ID>
-          <Action_Code>05</Action_Code>
-          <POS_Entry_Mode>M</POS_Entry_Mode>
-        </Request>
-    headers:
-      Content-Type:
-      - xml
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Thu, 25 Apr 2019 14:12:56 GMT
-      Server:
-      - Apache
-      X-Powered-By:
-      - PHP/5.6.1
-      Content-Length:
-      - '337'
-      Content-Type:
-      - text/html; charset=UTF-8
-    body:
-      encoding: ASCII-8BIT
-      string: "<Response><Response_Code>00</Response_Code><Response_Text>090559</Response_Text><Auth_Reference>0001</Auth_Reference><Amount_Balance>3400.68</Amount_Balance><Expiration_Date>022439</Expiration_Date><Trans_Date_Time>042519081256</Trans_Date_Time><Card_Number>711806200498407</Card_Number><Transaction_ID>100538</Transaction_ID></Response>"
-    http_version: 
-  recorded_at: Thu, 25 Apr 2019 14:12:57 GMT
-- request:
-    method: post
-    uri: https://www.smart-transactions.com/gateway_no_lrc.php
-    body:
-      encoding: UTF-8
-      string: |
-        <Request>
           <Card_Number>711806200498407</Card_Number>
           <Transaction_Amount>1</Transaction_Amount>
           <Transaction_ID>1</Transaction_ID>
@@ -89,6 +16,10 @@ http_interactions:
           <POS_Entry_Mode>M</POS_Entry_Mode>
         </Request>
     headers:
+      User-Agent:
+      - excon/0.64.0
+      Accept:
+      - "*/*"
       Content-Type:
       - xml
   response:
@@ -97,7 +28,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 25 Apr 2019 14:12:58 GMT
+      - Fri, 26 Apr 2019 20:09:03 GMT
       Server:
       - Apache
       X-Powered-By:
@@ -108,9 +39,49 @@ http_interactions:
       - text/html; charset=UTF-8
     body:
       encoding: ASCII-8BIT
-      string: "<Response><Response_Code>00</Response_Code><Response_Text>555344</Response_Text><Auth_Reference>0002</Auth_Reference><Amount_Balance>3399.68</Amount_Balance><Expiration_Date>022439</Expiration_Date><Trans_Date_Time>042519081258</Trans_Date_Time><Card_Number>711806200498407</Card_Number><Transaction_ID>1</Transaction_ID></Response>"
+      string: "<Response><Response_Code>00</Response_Code><Response_Text>855412</Response_Text><Auth_Reference>0010</Auth_Reference><Amount_Balance>3399.68</Amount_Balance><Expiration_Date>042139</Expiration_Date><Trans_Date_Time>042619140903</Trans_Date_Time><Card_Number>711806200498407</Card_Number><Transaction_ID>1</Transaction_ID></Response>"
     http_version: 
-  recorded_at: Thu, 25 Apr 2019 14:12:58 GMT
+  recorded_at: Fri, 26 Apr 2019 20:09:03 GMT
+- request:
+    method: post
+    uri: https://www.smart-transactions.com/gateway_no_lrc.php
+    body:
+      encoding: UTF-8
+      string: |
+        <Request>
+          <Card_Number>711806200498407</Card_Number>
+          <Merchant_Number>111111111111</Merchant_Number>
+          <Terminal_ID>220</Terminal_ID>
+          <Action_Code>05</Action_Code>
+          <POS_Entry_Mode>M</POS_Entry_Mode>
+        </Request>
+    headers:
+      User-Agent:
+      - excon/0.64.0
+      Accept:
+      - "*/*"
+      Content-Type:
+      - xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 26 Apr 2019 20:09:06 GMT
+      Server:
+      - Apache
+      X-Powered-By:
+      - PHP/5.6.1
+      Content-Length:
+      - '332'
+      Content-Type:
+      - text/html; charset=UTF-8
+    body:
+      encoding: ASCII-8BIT
+      string: "<Response><Response_Code>00</Response_Code><Response_Text>275113</Response_Text><Auth_Reference>0011</Auth_Reference><Amount_Balance>3399.68</Amount_Balance><Expiration_Date>042139</Expiration_Date><Trans_Date_Time>042619140905</Trans_Date_Time><Card_Number>711806200498407</Card_Number><Transaction_ID>1</Transaction_ID></Response>"
+    http_version: 
+  recorded_at: Fri, 26 Apr 2019 20:09:06 GMT
 - request:
     method: post
     uri: http://httpbin.org/post
@@ -118,10 +89,14 @@ http_interactions:
       encoding: UTF-8
       string: '{"key":"value"}'
     headers:
-      Content-Type:
-      - application/json
+      User-Agent:
+      - excon/0.64.0
+      Accept:
+      - "*/*"
       Proxy-Connection:
       - Keep-Alive
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -134,7 +109,7 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 25 Apr 2019 14:12:58 GMT
+      - Fri, 26 Apr 2019 20:09:07 GMT
       Referrer-Policy:
       - no-referrer-when-downgrade
       Server:
@@ -146,25 +121,26 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       Content-Length:
-      - '359'
+      - '430'
       X-Cache:
-      - MISS from instance-4
+      - MISS from instance-2
       X-Cache-Lookup:
-      - MISS from instance-4:80
+      - MISS from instance-2:443
       Via:
-      - 1.1 instance-4 (squid/3.5.23)
+      - 1.1 instance-2 (squid/3.5.23)
       Connection:
       - keep-alive
     body:
       encoding: ASCII-8BIT
       string: "{\n  \"args\": {}, \n  \"data\": \"{\\\"key\\\":\\\"value\\\"}\", \n
-        \ \"files\": {}, \n  \"form\": {}, \n  \"headers\": {\n    \"Cache-Control\":
-        \"max-age=259200\", \n    \"Content-Length\": \"15\", \n    \"Content-Type\":
-        \"application/json\", \n    \"Host\": \"httpbin.org\"\n  }, \n  \"json\":
-        {\n    \"key\": \"value\"\n  }, \n  \"origin\": \"35.245.35.105, 35.245.35.105\",
+        \ \"files\": {}, \n  \"form\": {}, \n  \"headers\": {\n    \"Accept\": \"*/*\",
+        \n    \"Cache-Control\": \"max-age=259200\", \n    \"Content-Length\": \"15\",
+        \n    \"Content-Type\": \"application/json\", \n    \"Host\": \"httpbin.org\",
+        \n    \"User-Agent\": \"excon/0.64.0\"\n  }, \n  \"json\": {\n    \"key\":
+        \"value\"\n  }, \n  \"origin\": \"177.84.195.8, 35.229.113.175, 177.84.195.8\",
         \n  \"url\": \"https://httpbin.org/post\"\n}\n"
     http_version: 
-  recorded_at: Thu, 25 Apr 2019 14:12:59 GMT
+  recorded_at: Fri, 26 Apr 2019 20:09:06 GMT
 - request:
     method: post
     uri: https://www.smart-transactions.com/gateway_no_lrc.php
@@ -181,6 +157,10 @@ http_interactions:
           <POS_Entry_Mode>M</POS_Entry_Mode>
         </Request>
     headers:
+      User-Agent:
+      - excon/0.64.0
+      Accept:
+      - "*/*"
       Content-Type:
       - xml
   response:
@@ -189,7 +169,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 25 Apr 2019 14:13:00 GMT
+      - Fri, 26 Apr 2019 20:09:09 GMT
       Server:
       - Apache
       X-Powered-By:
@@ -200,9 +180,50 @@ http_interactions:
       - text/html; charset=UTF-8
     body:
       encoding: ASCII-8BIT
-      string: "<Response><Response_Code>00</Response_Code><Response_Text>840219</Response_Text><Auth_Reference>0003</Auth_Reference><Amount_Balance>3400.68</Amount_Balance><Expiration_Date>022439</Expiration_Date><Trans_Date_Time>042519081259</Trans_Date_Time><Card_Number>711806200498407</Card_Number><Transaction_ID>1</Transaction_ID></Response>"
+      string: "<Response><Response_Code>00</Response_Code><Response_Text>973728</Response_Text><Auth_Reference>0012</Auth_Reference><Amount_Balance>3400.68</Amount_Balance><Expiration_Date>042139</Expiration_Date><Trans_Date_Time>042619140908</Trans_Date_Time><Card_Number>711806200498407</Card_Number><Transaction_ID>1</Transaction_ID></Response>"
     http_version: 
-  recorded_at: Thu, 25 Apr 2019 14:13:00 GMT
+  recorded_at: Fri, 26 Apr 2019 20:09:09 GMT
+- request:
+    method: post
+    uri: https://www.smart-transactions.com/gateway_no_lrc.php
+    body:
+      encoding: UTF-8
+      string: |
+        <Request>
+          <Card_Number>1234521234</Card_Number>
+          <Merchant_Number>111111111111</Merchant_Number>
+          <Terminal_ID>220</Terminal_ID>
+          <Action_Code>05</Action_Code>
+          <POS_Entry_Mode>M</POS_Entry_Mode>
+        </Request>
+    headers:
+      User-Agent:
+      - excon/0.64.0
+      Accept:
+      - "*/*"
+      Content-Type:
+      - xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 26 Apr 2019 20:09:13 GMT
+      Server:
+      - Apache
+      X-Powered-By:
+      - PHP/5.6.1
+      Content-Length:
+      - '219'
+      Content-Type:
+      - text/html; charset=UTF-8
+    body:
+      encoding: ASCII-8BIT
+      string: "<Response><Response_Code>01</Response_Code><Response_Text>INVALID CARD
+        \ 12</Response_Text><Amount_Balance>0.00</Amount_Balance><Trans_Date_Time>042619140912</Trans_Date_Time><Transaction_ID>1</Transaction_ID></Response>"
+    http_version: 
+  recorded_at: Fri, 26 Apr 2019 20:09:13 GMT
 - request:
     method: post
     uri: http://httpbin.org/post
@@ -210,6 +231,10 @@ http_interactions:
       encoding: UTF-8
       string: '{"key":"value"}'
     headers:
+      User-Agent:
+      - excon/0.64.0
+      Accept:
+      - "*/*"
       Content-Type:
       - application/json
   response:
@@ -224,7 +249,7 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 25 Apr 2019 14:15:26 GMT
+      - Fri, 26 Apr 2019 20:09:21 GMT
       Referrer-Policy:
       - no-referrer-when-downgrade
       Server:
@@ -236,16 +261,17 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       Content-Length:
-      - '321'
+      - '374'
       Connection:
       - keep-alive
     body:
       encoding: ASCII-8BIT
       string: "{\n  \"args\": {}, \n  \"data\": \"{\\\"key\\\":\\\"value\\\"}\", \n
-        \ \"files\": {}, \n  \"form\": {}, \n  \"headers\": {\n    \"Content-Length\":
-        \"15\", \n    \"Content-Type\": \"application/json\", \n    \"Host\": \"httpbin.org\"\n
-        \ }, \n  \"json\": {\n    \"key\": \"value\"\n  }, \n  \"origin\": \"177.37.199.105,
-        177.37.199.105\", \n  \"url\": \"https://httpbin.org/post\"\n}\n"
+        \ \"files\": {}, \n  \"form\": {}, \n  \"headers\": {\n    \"Accept\": \"*/*\",
+        \n    \"Content-Length\": \"15\", \n    \"Content-Type\": \"application/json\",
+        \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"excon/0.64.0\"\n
+        \ }, \n  \"json\": {\n    \"key\": \"value\"\n  }, \n  \"origin\": \"177.84.195.8,
+        177.84.195.8\", \n  \"url\": \"https://httpbin.org/post\"\n}\n"
     http_version: 
-  recorded_at: Thu, 25 Apr 2019 14:15:26 GMT
+  recorded_at: Fri, 26 Apr 2019 20:09:21 GMT
 recorded_with: VCR 4.0.0
