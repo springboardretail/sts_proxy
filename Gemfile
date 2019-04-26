@@ -1,5 +1,7 @@
 source 'https://rubygems.org/'
 
+ruby '~> 2.5.3'
+
 # Rack server
 gem 'puma'
 
@@ -17,7 +19,7 @@ gem 'builder'
 gem 'activesupport'
 
 # For creating HTTP requests
-gem 'rest-client'
+gem 'excon', '~> 0.64.0'
 
 # New relic
 gem 'newrelic_rpm'
