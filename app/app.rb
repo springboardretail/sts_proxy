@@ -3,7 +3,7 @@ require 'json'
 require 'active_support/core_ext/array/conversions'
 require 'active_support/core_ext/hash/conversions'
 require 'excon'
-
+require 'limiter'
 ##
 # Global configurations
 class App < Sinatra::Base

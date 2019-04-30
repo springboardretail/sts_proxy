@@ -3,12 +3,46 @@
 class Requester
   class << self
     def http_connection(endpoint)
-      if !Thread.current.thread_variable?(:connections_by_endpoint)
-        Thread.current.thread_variable_set(:connections_by_endpoint, {})
-      end
+      connections = read_variable_from_thread(
+        var_name: :connections_by_endpoint,
+        initial_value: {}
+      )
 
-      connections = Thread.current.thread_variable_get(:connections_by_endpoint)
       connections[endpoint] ||= Excon.new(endpoint, persistent: true)
+    end
+
+    def http_rate_limiter
+      read_variable_from_thread(
+        var_name: :http_rate_limiter,
+        initial_value: Limiter::RateQueue.new(
+          rate_limit_calls,
+          interval: rate_limit_interval
+        )
+      )
+    end
+
+    def read_variable_from_thread(var_name:, initial_value:)
+      Thread.current[var_name] ||= initial_value
+    end
+
+    def rate_limit_enabled?
+      !!ENV['RATE_LIMIT_ENABLED']
+    end
+
+    ##
+    # Returns the amount of allowed calls to be performed on configured interval.
+    # Defaults to 5 in case environment var isn't set
+    def rate_limit_calls
+      calls = ENV['RATE_LIMIT_CALLS'].to_i
+      calls > 0 ? calls : 5
+    end
+
+    ##
+    # Returns the interval in seconds.
+    # Defaults to 1 second in case environment var isn't set
+    def rate_limit_interval
+      interval = ENV['RATE_LIMIT_INTERVAL'].to_i
+      interval > 0 ? interval : 1
     end
 
     ##
@@ -21,6 +55,8 @@ class Requester
     # @param content_type [String]
     # @return [Hash] Excon response
     def request(endpoint, body, content_type)
+      http_rate_limiter.shift if rate_limit_enabled?
+
       http_connection(endpoint).post(
         body: body,
         headers: { 'Content-Type' => content_type }
