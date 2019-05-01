@@ -8,7 +8,7 @@ class Requester
         initial_value: {}
       )
 
-      connections[endpoint] ||= Excon.new(endpoint, persistent: true)
+      connections[endpoint] ||= Excon.new(endpoint)
     end
 
     def http_rate_limiter
