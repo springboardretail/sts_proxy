@@ -25,8 +25,10 @@ class FormatChanger
         Hash.from_xml(xml)
       rescue REXML::ParseException => e
         {
-          'Response_Code' => '01',
-          'Response_Text' => error_message_from_invalid_xml(xml)
+          'Response' => {
+            'Response_Code' => '01',
+            'Response_Text' => error_message_from_invalid_xml(xml)
+          }
         }
       end
     end
