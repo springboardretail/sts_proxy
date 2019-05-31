@@ -4,6 +4,8 @@
 # @note uses active_support
 class FormatChanger
   class << self
+    RATE_LIMIT_MESSAGE = 'STS rate limit reached. The recent Gift Card was not processed yet. Please try again after one minute.'.freeze
+    INVALID_BODY_MESSAGE = "Couldn't communicate with STS. Please try again.".freeze
     ##
     # Transforms hash to xml
     #
@@ -19,7 +21,23 @@ class FormatChanger
     # @param [String] XML
     # @return [Hash]
     def from_xml_to_hash(xml)
-      Hash.from_xml(xml)
+      begin
+        Hash.from_xml(xml)
+      rescue REXML::ParseException => e
+        {
+          'Response_Code' => '01',
+          'Response_Text' => error_message_from_invalid_xml(xml)
+        }
+      end
+    end
+
+    ##
+    # Returns the error message of an invalid xml
+    #
+    # @param [String] XML
+    # @return [String]
+    def error_message_from_invalid_xml(xml)
+      xml.include?('INVALID ORIGIN') ? RATE_LIMIT_MESSAGE : INVALID_BODY_MESSAGE
     end
   end
 end

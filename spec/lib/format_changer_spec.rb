@@ -28,6 +28,32 @@ class FormatChangerSpec < StsProxySpec
 
         assert_equal(some_hash, expected_hash)
       end
+
+      context 'when xml is invalid' do
+        let(:xml) do
+          '<Response><Response_Code>01</Response_Code><Response_Text>SOME ERROR</Response_Text></Response'
+        end
+
+        it 'returns a failed to communicate to STS response error hash' do
+          assert_equal(FormatChanger.from_xml_to_hash(xml), {
+            'Response_Code' => '01',
+            'Response_Text' => "Couldn't communicate with STS. Please try again."
+          })
+        end
+
+        context 'when response is invalid origin' do
+          let(:xml) do
+            '<Response><Response_Code>01</Response_Code><Response_Text>INVALID ORIGIN</Response_Text></Response'
+          end
+
+          it 'returns a failed to communicate to STS response error hash' do
+            assert_equal(FormatChanger.from_xml_to_hash(xml), {
+              'Response_Code' => '01',
+              'Response_Text' => 'STS rate limit reached. The recent Gift Card was not processed yet. Please try again after one minute.'
+            })
+          end
+        end
+      end
     end
   end
 end
