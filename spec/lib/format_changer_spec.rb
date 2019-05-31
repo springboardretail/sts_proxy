@@ -36,8 +36,10 @@ class FormatChangerSpec < StsProxySpec
 
         it 'returns a failed to communicate to STS response error hash' do
           assert_equal(FormatChanger.from_xml_to_hash(xml), {
-            'Response_Code' => '01',
-            'Response_Text' => "Couldn't communicate with STS. Please try again."
+            'Response' => {
+              'Response_Code' => '01',
+              'Response_Text' => "Couldn't communicate with STS. Please try again."
+            }
           })
         end
 
@@ -48,8 +50,10 @@ class FormatChangerSpec < StsProxySpec
 
           it 'returns a failed to communicate to STS response error hash' do
             assert_equal(FormatChanger.from_xml_to_hash(xml), {
-              'Response_Code' => '01',
-              'Response_Text' => 'STS rate limit reached. The recent Gift Card was not processed yet. Please try again after one minute.'
+              'Response' => {
+                'Response_Code' => '01',
+                'Response_Text' => 'STS rate limit reached. The recent Gift Card was not processed yet. Please try again after one minute.'
+              }
             })
           end
         end
