@@ -3,6 +3,7 @@ require './spec/spec_helper'
 class AppControllerSpec < StsProxySpec
   describe AppController do
     before do
+      ENV['STS_GATEWAY_URL'] = 'https://www.smart-transactions.com/gateway_no_lrc.php'
       header 'Content-Type', 'application/json'
     end
 

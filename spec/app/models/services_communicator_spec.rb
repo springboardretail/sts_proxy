@@ -98,5 +98,26 @@ class ServicesCommunicatorSpec < StsProxySpec
         assert_instance_of Float, filtered_data["balance"].to_f
       end
     end
+
+    describe '#sts_url' do
+      before do
+        ENV['STS_GATEWAY_URL'] = 'http://gateway'
+      end
+
+      it 'returns STS URL from environment vars' do
+        assert_equal 'http://gateway', subject.send(:sts_url)
+      end
+
+      context 'when env var is not set' do
+        before do
+          ENV['STS_GATEWAY_URL'] = nil
+        end
+
+        it 'raises an error' do
+          err = -> { subject.send(:sts_url) }.must_raise(RuntimeError)
+          err.message.must_match 'Missing STS gateway URL'
+        end
+      end
+    end
   end
 end
