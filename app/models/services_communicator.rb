@@ -9,7 +9,6 @@
 # @param action [Symbol] action type
 class ServicesCommunicator
   attr_accessor :json_params, :url_params, :action
-  STS_URL = 'https://www.smart-transactions.com/gateway_no_lrc.php'
 
   def initialize(json_params, url_params, action, logger)
     @json_params = json_params
@@ -27,7 +26,7 @@ class ServicesCommunicator
     combined_params = combine_params(renamed_params, url_params)
     data_to_send = change_format(combined_params, :hash, :xml)
 
-    received_data = send_data(data_to_send, STS_URL)
+    received_data = send_data(data_to_send, sts_url)
     data_to_read = change_format(received_data, :xml, :hash)
     error_hash = errors(data_to_read)
 
@@ -37,7 +36,11 @@ class ServicesCommunicator
 
   private
 
-  attr_reader :logger
+  attr_reader :logger, :sts_url
+
+  def sts_url
+    @sts_url ||= ENV['STS_GATEWAY_URL'] or raise 'Missing STS gateway URL'
+  end
 
   ##
   # Renames params from SR to STS syntax using guides for a certain action
