@@ -54,13 +54,19 @@ class Requester
     # @param body [String] data to be sent
     # @param content_type [String]
     # @return [Hash] Excon response
-    def request(endpoint, body, content_type)
+    def request(endpoint, body, content_type, retry_limit: 0)
       http_rate_limiter.shift if rate_limit_enabled?
 
-      http_connection(endpoint).post(
+      request_options = {
+        idempotent: true,
+        retry_limit: retry_limit.to_i,
+        expects: [200, 201],
+        method: :post,
         body: body,
         headers: { 'Content-Type' => content_type }
-      )
+      }
+
+      http_connection(endpoint).request(request_options)
     end
   end
 end
