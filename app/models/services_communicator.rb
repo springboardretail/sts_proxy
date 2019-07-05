@@ -111,30 +111,39 @@ class ServicesCommunicator
   end
 
   def should_retry_request?(response, request_count)
-    request_count < MAX_CHECK_BALANCE_RETRY && response.body.empty? && action == 'check_balance'
+    check_balance? && response.body.empty? && request_count <= MAX_CHECK_BALANCE_RETRY
   end
 
   ##
   # Performs the request on STS API and retry in case action is
   # check_balance and the response body was empty.
-  def request(data, url, request_count: 0)
-    logger.debug("Request to STS (#{request_count + 1}):")
-    logger.debug(url)
-    logger.debug(data)
+  def request(data, url)
+    request_count = 0
+    response = do_request(data, url, request_count)
 
-    response = Requester.request(url, data, :xml, retry_limit: action_retry_limit)
-    request_count += 1
-
-    if should_retry_request?(response, request_count)
+    until !should_retry_request?(response, request_count)
+      request_count += 1
       sleep RETRY_REQUEST_SLEEP_SECONDS * request_count
-      return request(data, url, request_count: request_count)
+      response = do_request(data, url, request_count)
     end
 
     response
   end
 
+  def do_request(data, url, request_count)
+    logger.debug("Request to STS (#{request_count + 1}):")
+    logger.debug(url)
+    logger.debug(data)
+
+    Requester.request(url, data, :xml, retry_limit: action_retry_limit)
+  end
+
+  def check_balance?
+    action.to_s == 'check_balance'
+  end
+
   def action_retry_limit
-    action == 'check_balance' ? MAX_CHECK_BALANCE_RETRY : 0
+    check_balance? ? MAX_CHECK_BALANCE_RETRY : 0
   end
 
   def errors(data)

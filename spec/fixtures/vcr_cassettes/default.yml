@@ -226,46 +226,6 @@ http_interactions:
   recorded_at: Fri, 26 Apr 2019 20:09:13 GMT
 - request:
     method: post
-    uri: https://www.smart-transactions.com/gateway_no_lrc.php
-    body:
-      encoding: UTF-8
-      string: |
-        <Request>
-          <Card_Number>EMPTY_CHECK_BALANCE_RESPONSE_CARD</Card_Number>
-          <Merchant_Number>111111111111</Merchant_Number>
-          <Terminal_ID>220</Terminal_ID>
-          <Action_Code>05</Action_Code>
-          <POS_Entry_Mode>M</POS_Entry_Mode>
-        </Request>
-    headers:
-      User-Agent:
-      - excon/0.64.0
-      Accept:
-      - "*/*"
-      Content-Type:
-      - xml
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 26 Apr 2019 20:09:13 GMT
-      Server:
-      - Apache
-      X-Powered-By:
-      - PHP/5.6.1
-      Content-Length:
-      - '219'
-      Content-Type:
-      - text/html; charset=UTF-8
-    body:
-      encoding: ASCII-8BIT
-      string: ""
-    http_version:
-  recorded_at: Fri, 26 Apr 2019 20:09:13 GMT
-- request:
-    method: post
     uri: http://httpbin.org/post
     body:
       encoding: UTF-8

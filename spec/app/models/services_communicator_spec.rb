@@ -76,12 +76,14 @@ class ServicesCommunicatorSpec < StsProxySpec
         let(:card_number) { 'EMPTY_CHECK_BALANCE_RESPONSE_CARD'}
 
         it 'returns a mocked STS response' do
-          assert_equal Hash.from_xml(received_data), {
-            'Response' => {
-              'Response_Code' => '01',
-              'Response_Text' => 'Unresolved action response'
+          VCR.use_cassette('empty_response', allow_playback_repeats: true) do
+            assert_equal Hash.from_xml(received_data), {
+              'Response' => {
+                'Response_Code' => '01',
+                'Response_Text' => 'Unresolved action response'
+              }
             }
-          }
+          end
         end
       end
     end
