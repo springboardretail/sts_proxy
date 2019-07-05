@@ -71,6 +71,19 @@ class ServicesCommunicatorSpec < StsProxySpec
       it 'returns data from a remote url' do
         assert_equal Hash.from_xml(received_data), expected_hash
       end
+
+      context 'when STS returns an empty body response' do
+        let(:card_number) { 'EMPTY_CHECK_BALANCE_RESPONSE_CARD'}
+
+        it 'returns a mocked STS response' do
+          assert_equal Hash.from_xml(received_data), {
+            'Response' => {
+              'Response_Code' => '01',
+              'Response_Text' => 'Unresolved action response'
+            }
+          }
+        end
+      end
     end
 
     describe '#errors' do

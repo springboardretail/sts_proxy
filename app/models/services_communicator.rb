@@ -36,6 +36,9 @@ class ServicesCommunicator
 
   private
 
+  MAX_CHECK_BALANCE_RETRY = 2
+  RETRY_REQUEST_SLEEP_SECONDS = 0.2
+
   attr_reader :logger, :sts_url
 
   def sts_url
@@ -83,18 +86,55 @@ class ServicesCommunicator
   # @param url [String] url to send data to
   # @return [String] Response from remote service
   def send_data(data, url)
-    logger.debug('Request to STS:')
-    logger.debug(url)
-    logger.debug(data)
-
-    content_type = :xml
-    response = Requester.request(url, data, content_type)
+    response = request(data, url)
 
     logger.debug("Response from STS: Status #{response.status}")
     logger.debug(response.headers.inspect)
-    logger.debug(response.body)
 
+    if response.body.empty?
+      logger.debug('EMPTY BODY')
+      return unresolved_sts_response
+    end
+
+    logger.debug(response.body)
     response.body
+  end
+
+  ##
+  # Mock an error response format returned by STS
+  def unresolved_sts_response
+    xml_builder = Builder::XmlMarkup.new(indent: 2)
+    xml_builder.tag!('Response') do
+      xml_builder.tag!('Response_Code', '01')
+      xml_builder.tag!('Response_Text', 'Unresolved action response')
+    end
+  end
+
+  def should_retry_request?(response, request_count)
+    request_count < MAX_CHECK_BALANCE_RETRY && response.body.empty? && action == 'check_balance'
+  end
+
+  ##
+  # Performs the request on STS API and retry in case action is
+  # check_balance and the response body was empty.
+  def request(data, url, request_count: 0)
+    logger.debug("Request to STS (#{request_count + 1}):")
+    logger.debug(url)
+    logger.debug(data)
+
+    response = Requester.request(url, data, :xml, retry_limit: action_retry_limit)
+    request_count += 1
+
+    if should_retry_request?(response, request_count)
+      sleep RETRY_REQUEST_SLEEP_SECONDS * request_count
+      return request(data, url, request_count: request_count)
+    end
+
+    response
+  end
+
+  def action_retry_limit
+    action == 'check_balance' ? MAX_CHECK_BALANCE_RETRY : 0
   end
 
   def errors(data)
