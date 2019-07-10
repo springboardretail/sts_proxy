@@ -7,7 +7,7 @@ http_interactions:
       encoding: UTF-8
       string: |
         <Request>
-          <Card_Number>EMPTY_CHECK_BALANCE_RESPONSE_CARD</Card_Number>
+          <Card_Number>EMPTY_RESPONSE_CARD</Card_Number>
           <Merchant_Number>111111111111</Merchant_Number>
           <Terminal_ID>220</Terminal_ID>
           <Action_Code>05</Action_Code>
