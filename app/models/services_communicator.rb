@@ -24,9 +24,7 @@ class ServicesCommunicator
   def run
     renamed_params = rename_params(json_params, action)
     combined_params = combine_params(renamed_params, url_params)
-    data_to_send = change_format(combined_params, :hash, :xml)
-
-    received_data = send_data(data_to_send, sts_url)
+    received_data = send_data(combined_params, sts_url)
     data_to_read = change_format(received_data, :xml, :hash)
     error_hash = errors(data_to_read)
 
@@ -36,7 +34,7 @@ class ServicesCommunicator
 
   private
 
-  MAX_CHECK_BALANCE_RETRY = 2
+  DEFAULT_MAX_RETRY_ATTEMPTS = 2
   RETRY_REQUEST_SLEEP_SECONDS = 0.2
 
   attr_reader :logger, :sts_url
@@ -110,21 +108,32 @@ class ServicesCommunicator
     end
   end
 
-  def should_retry_request?(response, request_count)
-    check_balance? && response.body.empty? && request_count <= MAX_CHECK_BALANCE_RETRY
+  def should_retry_request?(request_data, response, request_count)
+     can_retry_action?(request_data) && response.body.empty? && request_tries_not_exhausted?(request_count)
+  end
+
+  def can_retry_action?(data)
+    return true if action.to_s == 'check_balance'
+
+    data['Transaction_ID'].present?
+  end
+
+  def request_tries_not_exhausted?(request_count)
+    request_count <= action_retry_limit
   end
 
   ##
   # Performs the request on STS API and retry in case action is
   # check_balance and the response body was empty.
   def request(data, url)
+    data_to_send = change_format(data, :hash, :xml)
     request_count = 0
-    response = do_request(data, url, request_count)
+    response = do_request(data_to_send, url, request_count)
 
-    until !should_retry_request?(response, request_count)
+    until !should_retry_request?(data, response, request_count)
       request_count += 1
       sleep RETRY_REQUEST_SLEEP_SECONDS * request_count
-      response = do_request(data, url, request_count)
+      response = do_request(data_to_send, url, request_count)
     end
 
     response
@@ -143,7 +152,8 @@ class ServicesCommunicator
   end
 
   def action_retry_limit
-    check_balance? ? MAX_CHECK_BALANCE_RETRY : 0
+    max_attempts = ENV['MAX_RETRY_ATTEMPTS'].to_i
+    max_attempts > 0 ? max_attempts : DEFAULT_MAX_RETRY_ATTEMPTS
   end
 
   def errors(data)

@@ -29,6 +29,11 @@ class Requester
       !!ENV['RATE_LIMIT_ENABLED']
     end
 
+    def read_timeout
+      timeout = ENV['STS_HTTP_READ_TIMEOUT'].to_i
+      timeout > 0 ? timeout : 60
+    end
+
     ##
     # Returns the amount of allowed calls to be performed on configured interval.
     # Defaults to 5 in case environment var isn't set
@@ -58,6 +63,7 @@ class Requester
       http_rate_limiter.shift if rate_limit_enabled?
 
       request_options = {
+        read_timeout: read_timeout,
         idempotent: true,
         retry_limit: retry_limit.to_i,
         expects: [200, 201],
