@@ -32,6 +32,11 @@ class ServicesCommunicator
     filter_data(data_to_read, action)
   end
 
+  def action_retry_limit
+    max_attempts = ENV['MAX_RETRY_ATTEMPTS'].to_i
+    max_attempts > 0 ? max_attempts : DEFAULT_MAX_RETRY_ATTEMPTS
+  end
+
   private
 
   DEFAULT_MAX_RETRY_ATTEMPTS = 2
@@ -109,7 +114,20 @@ class ServicesCommunicator
   end
 
   def should_retry_request?(request_data, response, request_count)
-     can_retry_action?(request_data) && response.body.empty? && request_tries_not_exhausted?(request_count)
+    return false unless can_retry_action?(request_data) && request_tries_not_exhausted?(request_count)
+
+    invalid_body?(response.body)
+  end
+
+  def invalid_body?(body)
+    return true if body.empty?
+
+    begin
+      Hash.from_xml(body)
+      false
+    rescue
+      true
+    end
   end
 
   def can_retry_action?(data)
@@ -127,20 +145,20 @@ class ServicesCommunicator
   # check_balance and the response body was empty.
   def request(data, url)
     data_to_send = change_format(data, :hash, :xml)
-    request_count = 0
+    request_count = 1
     response = do_request(data_to_send, url, request_count)
 
     until !should_retry_request?(data, response, request_count)
-      request_count += 1
       sleep RETRY_REQUEST_SLEEP_SECONDS * request_count
       response = do_request(data_to_send, url, request_count)
+      request_count += 1
     end
 
     response
   end
 
   def do_request(data, url, request_count)
-    logger.debug("Request to STS (#{request_count + 1}):")
+    logger.debug("Request to STS (#{request_count}):")
     logger.debug(url)
     logger.debug(data)
 
@@ -149,11 +167,6 @@ class ServicesCommunicator
 
   def check_balance?
     action.to_s == 'check_balance'
-  end
-
-  def action_retry_limit
-    max_attempts = ENV['MAX_RETRY_ATTEMPTS'].to_i
-    max_attempts > 0 ? max_attempts : DEFAULT_MAX_RETRY_ATTEMPTS
   end
 
   def errors(data)

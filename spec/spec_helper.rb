@@ -6,6 +6,7 @@ require 'minitest/reporters'
 require 'builder'
 require 'maxitest/autorun'
 require 'vcr'
+require 'webmock/minitest'
 include Rack::Test::Methods
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new

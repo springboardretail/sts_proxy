@@ -73,6 +73,19 @@ class ServicesCommunicatorSpec < StsProxySpec
         assert_equal Hash.from_xml(received_data), expected_hash
       end
 
+      context 'when STS returns a bad response body' do
+        let(:card_number) { 'BAD_RESPONSE_BODY_CARD' }
+
+        it 'retries the request' do
+          stub_request(:post, sts_url)
+
+          VCR.use_cassette('bad_response') do
+            received_data
+            assert_requested(:post, sts_url, times: subject.action_retry_limit + 1)
+          end
+        end
+      end
+
       context 'when STS returns an empty body response' do
         let(:card_number) { 'EMPTY_RESPONSE_CARD'}
 
