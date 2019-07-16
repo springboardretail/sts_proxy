@@ -35,6 +35,8 @@ class ParamsOperators::Renamer
     parsed_result = {}
     data.each do |key, value|
       xml_name = guides.find { |hash| hash[:input] == key }[:result]
+      next if xml_name.start_with?('DEPRECATED')
+
       parsed_result[xml_name] = value
     end
     parsed_result

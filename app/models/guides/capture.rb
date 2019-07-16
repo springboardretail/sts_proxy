@@ -7,6 +7,10 @@ class Guides::Capture < Guides::Base
     [
       {
         input: 'payment_id',
+        result: 'DEPRECATED_Transaction_ID'
+      },
+      {
+        input: 'reference_id',
         result: 'Transaction_ID'
       },
       {
