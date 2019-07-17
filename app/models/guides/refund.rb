@@ -7,10 +7,7 @@ class Guides::Refund < Guides::Base
     [
       {
         input: 'payment_id',
-        result: 'DEPRECATED_Transaction_ID'
-      },
-      {
-        input: 'reference_id',
+        input_fallback: 'reference_id',
         result: 'Transaction_ID'
       },
       {
