@@ -30,7 +30,7 @@ class AppControllerSpec < StsProxySpec
       subject { '/v1/capture?Merchant_Number=111111111111&Terminal_ID=220&Action_Code=01&POS_Entry_Mode=M' }
 
       it 'returns ok' do
-        post subject, { number: 711806200498407, amount: 1, payment_id: 1 }.to_json
+        post subject, { number: 711806200498407, amount: 1, reference_id: 1, payment_id: 1 }.to_json
         assert last_response.ok?
       end
     end
@@ -39,7 +39,7 @@ class AppControllerSpec < StsProxySpec
       subject { '/v1/refund?Merchant_Number=111111111111&Terminal_ID=220&Action_Code=02&POS_Entry_Mode=M' }
 
       it 'returns ok' do
-        post subject, { number: 711806200498407, amount: 1, payment_id: 1 }.to_json
+        post subject, { number: 711806200498407, amount: 1, reference_id: 1, payment_id: 1 }.to_json
         assert last_response.ok?
       end
     end
