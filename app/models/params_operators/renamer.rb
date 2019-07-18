@@ -19,24 +19,22 @@ class ParamsOperators::Renamer
   private
 
   ##
-  # Gets input guides for current action
+  # Gets guides for current action
   #
-  # @return [Array of Hash]
+  # @return [Guides]
   def guides
-    @guides ||= Guides::GuidesRetriever.get_guides(action).input
+    @guides ||= Guides::GuidesRetriever.get_guides(action)
   end
 
   ##
   # Renames keys of received params using guides
   #
-  # @param guides [Array of Hash]
+  # @param guides [Guides]
   # @return [Hash] renamed params
   def rename_keys(guides)
     parsed_result = {}
     data.each do |key, value|
-      xml_name = guides.find { |hash| hash[:input] == key }[:result]
-      next if xml_name.start_with?('DEPRECATED')
-
+      xml_name = guides.find_input_result(key)
       parsed_result[xml_name] = value
     end
     parsed_result

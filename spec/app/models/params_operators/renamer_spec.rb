@@ -14,7 +14,7 @@ class RenamerSpec < StsProxySpec
 
     describe '#guides' do
       it 'returns an input guides array for a given action' do
-        subject.send(:guides).must_be_instance_of Array
+        subject.send(:guides).must_be_instance_of Guides::CheckBalance
       end
     end
 

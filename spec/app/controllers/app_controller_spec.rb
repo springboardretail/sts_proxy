@@ -33,6 +33,20 @@ class AppControllerSpec < StsProxySpec
         post subject, { number: 711806200498407, amount: 1, reference_id: 1, payment_id: 1 }.to_json
         assert last_response.ok?
       end
+
+      context 'when reference_id is not present but payment_id is' do
+        it 'returns ok' do
+          post subject, { number: 711806200498407, amount: 1, payment_id: 1 }.to_json
+          assert last_response.ok?
+        end
+      end
+
+      context 'when payment_id is not present but reference_id is' do
+        it 'returns ok' do
+          post subject, { number: 711806200498407, amount: 1, reference_id: 1 }.to_json
+          assert last_response.ok?
+        end
+      end
     end
 
     describe '/refund' do
@@ -41,6 +55,20 @@ class AppControllerSpec < StsProxySpec
       it 'returns ok' do
         post subject, { number: 711806200498407, amount: 1, reference_id: 1, payment_id: 1 }.to_json
         assert last_response.ok?
+      end
+
+      context 'when reference_id is not present but payment_id is' do
+        it 'returns ok' do
+          post subject, { number: 711806200498407, amount: 1, payment_id: 1 }.to_json
+          assert last_response.ok?
+        end
+      end
+
+      context 'when payment_id is not present but reference_id is' do
+        it 'returns ok' do
+          post subject, { number: 711806200498407, amount: 1, reference_id: 1 }.to_json
+          assert last_response.ok?
+        end
       end
     end
   end

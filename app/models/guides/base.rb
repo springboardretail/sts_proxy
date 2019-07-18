@@ -5,4 +5,12 @@
 class Guides::Base < Struct.new(:type)
   extend AbstractMethods
   abstract_methods :input, :output
+
+  def find_input_result(key)
+    find_input(key)[:result]
+  end
+
+  def find_input(key)
+    input.find { |hash| hash[:input] == key || hash[:input_fallback] == key }
+  end
 end
