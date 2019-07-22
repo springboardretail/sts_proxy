@@ -72,7 +72,14 @@ class Requester
         headers: { 'Content-Type' => content_type }
       }
 
-      http_connection(endpoint).request(request_options)
+      begin
+        retries ||= 0
+        http_connection(endpoint).request(request_options)
+      rescue Excon::Error::Timeout => e
+        retries += 1
+        retry if retries <= retry_limit
+        raise e
+      end
     end
   end
 end
