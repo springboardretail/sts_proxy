@@ -116,6 +116,7 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
+    yell (2.2.0)
 
 PLATFORMS
   ruby
@@ -142,6 +143,7 @@ DEPENDENCIES
   sinatra-reloader
   vcr
   webmock
+  yell
 
 RUBY VERSION
    ruby 2.5.3p105

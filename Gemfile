@@ -25,6 +25,7 @@ gem 'excon', '~> 0.64.0'
 gem 'newrelic_rpm'
 
 gem 'ruby-limiter'
+gem 'yell'
 
 group :development do
   # Interactive REPL
