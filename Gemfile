@@ -19,7 +19,7 @@ gem 'builder'
 gem 'activesupport'
 
 # For creating HTTP requests
-gem 'excon', '~> 0.64.0'
+gem 'excon', '~> 0.71.0'
 
 # New relic
 gem 'newrelic_rpm'

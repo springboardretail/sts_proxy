@@ -23,7 +23,7 @@ GEM
       safe_yaml (~> 1.0.0)
     debug_inspector (0.0.3)
     erubi (1.8.0)
-    excon (0.64.0)
+    excon (0.71.0)
     ffi (1.10.0)
     formatador (0.2.5)
     guard (2.15.0)
@@ -126,7 +126,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   builder
-  excon (~> 0.64.0)
+  excon (~> 0.71.0)
   guard
   guard-bundler
   guard-minitest
